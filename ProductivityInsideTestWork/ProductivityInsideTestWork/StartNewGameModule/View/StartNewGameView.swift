@@ -19,6 +19,12 @@ protocol StartNewGameViewOutput {
 
 
 class StartNewGameView: UIViewController, StartNewGameViewInput{
+	@IBOutlet weak var gameName: UILabel!
+
+	@IBOutlet weak var gameResults: UILabel!
+
+	@IBOutlet weak var startNewGameButton: UIButton!
+	
 	func setInitialState() {
 
 	}

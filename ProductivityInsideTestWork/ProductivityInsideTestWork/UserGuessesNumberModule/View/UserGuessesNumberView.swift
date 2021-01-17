@@ -18,7 +18,16 @@ protocol UserGuessesNumberViewOutput {
 
 class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 
+	@IBOutlet weak var roundNumber: UILabel!
+	@IBOutlet weak var youGuesses: UILabel!
+
+	@IBOutlet weak var guessedNumberByGamer: UITextField!
+
+	@IBOutlet weak var numberTips: UILabel!
+	
+	@IBOutlet weak var acceptNumber: UIButton!
 	var output: UserGuessesNumberViewOutput?
+
 
 	func setInitialState() {
 

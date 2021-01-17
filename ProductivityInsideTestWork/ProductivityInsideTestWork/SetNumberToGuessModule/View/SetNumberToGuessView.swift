@@ -18,6 +18,10 @@ protocol SetNumberToGuessViewOutput {
 
 class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 
+	@IBOutlet weak var roundNumber: UILabel!
+	@IBOutlet weak var enterNumber: UITextField!
+	@IBOutlet weak var acceptNumber: UIButton!
+
 	var output: SetNumberToGuessViewOutput?
 
 	func setInitialState() {

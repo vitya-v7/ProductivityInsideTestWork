@@ -18,6 +18,19 @@ protocol ComputerGuessesNumberViewOutput {
 
 class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInput {
 
+	@IBOutlet weak var roundNumber: UILabel!
+
+	@IBOutlet weak var computerGuesses: UILabel!
+
+
+	@IBOutlet weak var guessedNumberByComputer: UILabel!
+
+	@IBOutlet weak var greaterButton: UIButton!
+
+	@IBOutlet weak var equalButton: UIButton!
+
+	@IBOutlet weak var lessButton: UIButton!
+
 	var output: ComputerGuessesNumberViewOutput?
 
 	func setInitialState() {
