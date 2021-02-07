@@ -29,13 +29,14 @@ class AbstractFactory {
 		return view
 	}
 
-	class func createComputerGuessesNumberModule() -> UIViewController {
+	class func createComputerGuessesNumberModule(guessedNumber: Int) -> UIViewController {
 		let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
 		let view = storyboard.instantiateViewController(identifier: "ComputerGuessesNumberViewIdentifier") as! ComputerGuessesNumberView
 
 		let presenter = ComputerGuessesNumberPresenter()
 		view.output = presenter
 		presenter.view = view
+		presenter.guessedNumber = guessedNumber
 		return view
 	}
 

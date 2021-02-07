@@ -14,9 +14,14 @@ protocol ComputerGuessesNumberViewInput : UIViewController  {
 
 protocol ComputerGuessesNumberViewOutput {
 	func viewDidLoadDone()
+	func greaterButtonPressed()
+	func lessButtonPressed()
+	func equalButtonPressed()
 }
 
 class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInput {
+
+
 
 	@IBOutlet weak var roundNumber: UILabel!
 
@@ -33,18 +38,37 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 
 	var output: ComputerGuessesNumberViewOutput?
 
+	static var constanta = 100
+
+	var viewModel = ComputerGuessesNumberViewModel()
+
 	func setInitialState() {
 
 	}
 
 	func setViewModel(viewModel: ComputerGuessesNumberViewModel) {
-
+		self.viewModel = viewModel
+		self.roundNumber.text = String(self.viewModel.roundNumber!)
+		self.computerGuesses.text = String(self.viewModel.guessedNumberByComputer!)
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		navigationController?.navigationItem.setHidesBackButton(true, animated: false)
+		greaterButton.addTarget(self, action: #selector(guessedNumberIsGreater(_:)), for: .touchUpInside)
+		lessButton.addTarget(self, action: #selector(guessedNumberIsLess(_:)), for: .touchUpInside)
+		equalButton.addTarget(self, action: #selector(guessedNumberIsEqual(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
-        // Do any additional setup after loading the view.
     }
-	
+
+	@objc func guessedNumberIsGreater(_: UIButton) {
+		output?.greaterButtonPressed()
+	}
+
+	@objc func guessedNumberIsLess(_: UIButton) {
+		output?.lessButtonPressed()
+	}
+	@objc func guessedNumberIsEqual(_: UIButton) {
+		output?.equalButtonPressed()
+	}
 }

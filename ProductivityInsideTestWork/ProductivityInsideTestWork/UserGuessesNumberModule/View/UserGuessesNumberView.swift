@@ -9,11 +9,12 @@ import UIKit
 
 protocol UserGuessesNumberViewInput : UIViewController  {
 	func setInitialState()
-	func setViewModel(viewModel: ComputerGuessesNumberViewModel)
+	func setViewModel(viewModel: UserGuessesNumberViewModel)
 }
 
 protocol UserGuessesNumberViewOutput {
 	func viewDidLoadDone()
+	func numberWasEntered(number: Int) -> UserGuessesNumberViewModel.NumberTips
 }
 
 class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
@@ -27,22 +28,35 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	
 	@IBOutlet weak var acceptNumber: UIButton!
 	var output: UserGuessesNumberViewOutput?
-
+	var viewModel: UserGuessesNumberViewModel?
 
 	func setInitialState() {
 
+		self.youGuesses.text = "You Guesses"
+		self.guessedNumberByGamer.placeholder = "Guess the number"
+		self.acceptNumber.setTitle("Enter the number", for: .normal)
 	}
 
-	func setViewModel(viewModel: ComputerGuessesNumberViewModel) {
-
+	func setViewModel(viewModel: UserGuessesNumberViewModel) {
+		self.viewModel = viewModel
+		self.numberTips.text = "Number is " + viewModel.numberTip.rawValue
+		self.roundNumber.text = "Round №" + String(viewModel.roundNumber)
 	}
-
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+		acceptNumber.addTarget(self, action: #selector(numberWasEntered(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
         // Do any additional setup after loading the view.
     }
+
+	@objc func numberWasEntered(_:UIButton) {
+
+		if let number = Int(guessedNumberByGamer.text!) {
+			let tip = output?.numberWasEntered(number: number)
+			viewModel?.numberTip = tip!
+			self.numberTips.text = "Number is " + tip!.rawValue
+			}
+	}
 
 }

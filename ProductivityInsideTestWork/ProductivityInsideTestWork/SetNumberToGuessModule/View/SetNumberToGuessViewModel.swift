@@ -10,7 +10,10 @@ import Foundation
 class SetNumberToGuessViewModel {
 
 	let roundNumber: Int
-	var guessedNumber: Int
-	
+	var guessedNumber: Int?
+
+	init(roundNumber: Int) {
+		self.roundNumber = roundNumber
+	}
 
 }

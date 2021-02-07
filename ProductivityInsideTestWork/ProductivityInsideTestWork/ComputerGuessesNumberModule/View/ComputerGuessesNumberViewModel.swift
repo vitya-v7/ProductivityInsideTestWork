@@ -8,5 +8,15 @@
 import Foundation
 
 class ComputerGuessesNumberViewModel {
-	
+	var roundNumber: Int?
+	var guessedNumberByComputer: Int?
+
+	init(roundNumber: Int, guessedNumberByComputer: Int) {
+		self.roundNumber = roundNumber
+		self.guessedNumberByComputer = guessedNumberByComputer
+	}
+
+	init() {
+		
+	}
 }

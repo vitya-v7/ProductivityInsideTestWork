@@ -18,26 +18,38 @@ protocol StartNewGameViewOutput {
 }
 
 
-class StartNewGameView: UIViewController, StartNewGameViewInput{
+class StartNewGameView: UIViewController, StartNewGameViewInput {
 	@IBOutlet weak var gameName: UILabel!
 
 	@IBOutlet weak var gameResults: UILabel!
 
 	@IBOutlet weak var startNewGameButton: UIButton!
-	
-	func setInitialState() {
-
-	}
-
-	func setViewModel(viewModel: StartNewGameViewModel) {
-
-	}
 
 	var output: StartNewGameViewOutput?
 
+	var viewModel: StartNewGameViewModel?
+
+	func setInitialState() {
+		
+	}
+
+	func setViewModel(viewModel: StartNewGameViewModel) {
+		self.viewModel = viewModel
+		gameName.text = viewModel.title
+		gameResults.text = viewModel.gamerStatus.rawValue
+		startNewGameButton.setTitle(viewModel.buttonLabel, for: .normal)
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		startNewGameButton.addTarget(self, action: #selector(startNewGame(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
 		// Do any additional setup after loading the view.
 	}
+
+	@objc func startNewGame(_: UIButton) {
+		let newViewController = AbstractFactory.createSetNumberToGuessModule()
+		self.navigationController?.pushViewController(newViewController, animated: true)
+	}
+	
 }
