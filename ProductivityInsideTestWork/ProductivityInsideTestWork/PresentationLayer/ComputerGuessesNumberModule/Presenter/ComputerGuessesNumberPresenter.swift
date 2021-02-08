@@ -11,13 +11,14 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	weak var view: ComputerGuessesNumberViewInput?
 	var viewModel: ComputerGuessesNumberViewModel?
-	var roundNumber: Int = 0
+    var computerGuessingService: ComputerGuessingServiceInterface!
+
+	var roundNumber: Int = 1
 	var guessedNumber: Int = 0
-	var computerNumber = Int.random(in: Constants.minNumber ..< Constants.maxNumber + 1)
-	var minNumber = Constants.minNumber
-	var maxNumber = Constants.maxNumber
+
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
+        let computerNumber = computerGuessingService.startGame()
 		viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber, guessedNumberByComputer: computerNumber)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
@@ -25,30 +26,20 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func greaterButtonPressed() {
-		if minNumber < computerNumber {
-			minNumber = computerNumber + 1
-		}
-		computerNumber = (maxNumber - minNumber)/2 + minNumber
-		
-		viewModel?.guessedNumberByComputer = computerNumber
+        let computerNumber = computerGuessingService.greater()
+        viewModel?.guessedNumberByComputer = computerNumber
 		view?.setViewModel(viewModel: viewModel!)
-		attempts = attempts + 1
 	}
 
-	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func lessButtonPressed() {
-		if maxNumber > computerNumber {
-			maxNumber = computerNumber - 1
-		}
-		computerNumber = (maxNumber - minNumber)/2 + minNumber
+        let computerNumber = computerGuessingService.less()
 		viewModel?.guessedNumberByComputer = computerNumber
 		view?.setViewModel(viewModel: viewModel!)
-		attempts = attempts + 1
 	}
 
 	func equalButtonPressed() {
-		attempts = attempts + 1
-		let newViewController = AbstractFactory.createUserGuessesNumberModule()
+        computerGuessingService.equal()
+        let newViewController = ModulesFactory.createUserGuessesNumberModule()
 		self.view?.navigationController?.pushViewController(newViewController, animated: true)
 	}
 }

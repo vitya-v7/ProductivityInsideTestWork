@@ -16,4 +16,9 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
 	}
+
+    func onStartButtonTap() {
+        let newViewController = ModulesFactory.createSetNumberToGuessModule()
+        self.view?.navigationController?.pushViewController(newViewController, animated: true)
+    }
 }

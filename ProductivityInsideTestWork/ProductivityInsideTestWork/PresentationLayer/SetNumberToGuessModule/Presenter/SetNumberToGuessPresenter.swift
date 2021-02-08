@@ -10,7 +10,8 @@ import Foundation
 class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 
 	weak var view: SetNumberToGuessViewInput?
-	var viewModel: SetNumberToGuessViewModel?
+	var viewModel: SetNumberToGuessViewModel!
+    
 	func viewDidLoadDone() {
 		viewModel = SetNumberToGuessViewModel(roundNumber: 0)
 		view?.setViewModel(viewModel: viewModel!)
@@ -19,7 +20,7 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
-		let newViewController = AbstractFactory.createComputerGuessesNumberModule(guessedNumber: number)
+		let newViewController = ModulesFactory.createComputerGuessesNumberModule(guessedNumber: number)
 		self.view?.navigationController?.pushViewController(newViewController, animated: true)
 	}
 }

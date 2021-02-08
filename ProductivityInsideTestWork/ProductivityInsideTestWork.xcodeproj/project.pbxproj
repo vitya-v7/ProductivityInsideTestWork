@@ -14,7 +14,7 @@
 		84B338D225B022180088CCC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84B338D025B022180088CCC0 /* Main.storyboard */; };
 		84B338D425B022190088CCC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B338D325B022190088CCC0 /* Assets.xcassets */; };
 		84B338D725B022190088CCC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84B338D525B022190088CCC0 /* LaunchScreen.storyboard */; };
-		84B338E625B0C8860088CCC0 /* AbstractFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338E525B0C8860088CCC0 /* AbstractFactory.swift */; };
+		84B338E625B0C8860088CCC0 /* ModulesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338E525B0C8860088CCC0 /* ModulesFactory.swift */; };
 		84B338EC25B0C90C0088CCC0 /* StartNewGamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338EB25B0C90C0088CCC0 /* StartNewGamePresenter.swift */; };
 		84B338EF25B0C93A0088CCC0 /* StartNewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338EE25B0C93A0088CCC0 /* StartNewGameViewModel.swift */; };
 		84B338F225B0C9520088CCC0 /* StartNewGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338F125B0C9520088CCC0 /* StartNewGameView.swift */; };
@@ -27,7 +27,22 @@
 		84B3390F25B0DD870088CCC0 /* UserGuessesNumberPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3390E25B0DD870088CCC0 /* UserGuessesNumberPresenter.swift */; };
 		84B3391225B0DD9B0088CCC0 /* UserGuessesNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3391125B0DD9B0088CCC0 /* UserGuessesNumberView.swift */; };
 		84B3391525B0DDAC0088CCC0 /* UserGuessesNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3391425B0DDAC0088CCC0 /* UserGuessesNumberViewModel.swift */; };
+		D9AF6B0925D0103F00A016DF /* ComputerGuessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AF6B0825D0103F00A016DF /* ComputerGuessingService.swift */; };
+		D9AF6B2625D0195200A016DF /* UserGuessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AF6B2525D0195200A016DF /* UserGuessingService.swift */; };
+		D9AF6B3225D01DD100A016DF /* ComputerGuessingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AF6B3125D01DD100A016DF /* ComputerGuessingServiceTests.swift */; };
+		D9AF6B4725D02D0400A016DF /* NumberTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AF6B4625D02D0400A016DF /* NumberTips.swift */; };
+		D9AF6B4D25D0384600A016DF /* UserGuessingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AF6B4C25D0384600A016DF /* UserGuessingServiceTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D9AF6B3425D01DD100A016DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84B338BF25B022180088CCC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84B338C625B022180088CCC0;
+			remoteInfo = ProductivityInsideTestWork;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		84ACB43225CB8C5B0019807D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -39,7 +54,7 @@
 		84B338D325B022190088CCC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84B338D625B022190088CCC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84B338D825B022190088CCC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84B338E525B0C8860088CCC0 /* AbstractFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractFactory.swift; sourceTree = "<group>"; };
+		84B338E525B0C8860088CCC0 /* ModulesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactory.swift; sourceTree = "<group>"; };
 		84B338EB25B0C90C0088CCC0 /* StartNewGamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNewGamePresenter.swift; sourceTree = "<group>"; };
 		84B338EE25B0C93A0088CCC0 /* StartNewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNewGameViewModel.swift; sourceTree = "<group>"; };
 		84B338F125B0C9520088CCC0 /* StartNewGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNewGameView.swift; sourceTree = "<group>"; };
@@ -52,10 +67,24 @@
 		84B3390E25B0DD870088CCC0 /* UserGuessesNumberPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuessesNumberPresenter.swift; sourceTree = "<group>"; };
 		84B3391125B0DD9B0088CCC0 /* UserGuessesNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuessesNumberView.swift; sourceTree = "<group>"; };
 		84B3391425B0DDAC0088CCC0 /* UserGuessesNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuessesNumberViewModel.swift; sourceTree = "<group>"; };
+		D9AF6B0825D0103F00A016DF /* ComputerGuessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerGuessingService.swift; sourceTree = "<group>"; };
+		D9AF6B2525D0195200A016DF /* UserGuessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuessingService.swift; sourceTree = "<group>"; };
+		D9AF6B2F25D01DD000A016DF /* ProductivityInsideTestWorkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductivityInsideTestWorkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9AF6B3125D01DD100A016DF /* ComputerGuessingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerGuessingServiceTests.swift; sourceTree = "<group>"; };
+		D9AF6B3325D01DD100A016DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9AF6B4625D02D0400A016DF /* NumberTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTips.swift; sourceTree = "<group>"; };
+		D9AF6B4C25D0384600A016DF /* UserGuessingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuessingServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		84B338C425B022180088CCC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9AF6B2C25D01DD000A016DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -69,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				84B338C925B022180088CCC0 /* ProductivityInsideTestWork */,
+				D9AF6B3025D01DD000A016DF /* ProductivityInsideTestWorkTests */,
 				84B338C825B022180088CCC0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				84B338C725B022180088CCC0 /* ProductivityInsideTestWork.app */,
+				D9AF6B2F25D01DD000A016DF /* ProductivityInsideTestWorkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,11 +115,9 @@
 		84B338C925B022180088CCC0 /* ProductivityInsideTestWork */ = {
 			isa = PBXGroup;
 			children = (
+				D9AF6B4425D02CB800A016DF /* PresentationLayer */,
+				D9AF6B0725D0101200A016DF /* Services */,
 				84B338E325B0C8600088CCC0 /* Assembly */,
-				84B338DF25B0C79B0088CCC0 /* StartNewGameModule */,
-				84B338E225B0C8100088CCC0 /* SetNumberToGuessModule */,
-				84B338E125B0C7EF0088CCC0 /* ComputerGuessesNumberModule */,
-				84B338E025B0C7BD0088CCC0 /* UserGuessesNumberModule */,
 				84B338CA25B022180088CCC0 /* AppDelegate.swift */,
 				84B338CC25B022180088CCC0 /* SceneDelegate.swift */,
 				84B338CE25B022180088CCC0 /* ViewController.swift */,
@@ -140,7 +169,7 @@
 		84B338E325B0C8600088CCC0 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				84B338E525B0C8860088CCC0 /* AbstractFactory.swift */,
+				84B338E525B0C8860088CCC0 /* ModulesFactory.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -213,6 +242,53 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		D9AF6B0725D0101200A016DF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D9AF6B0825D0103F00A016DF /* ComputerGuessingService.swift */,
+				D9AF6B2525D0195200A016DF /* UserGuessingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D9AF6B3025D01DD000A016DF /* ProductivityInsideTestWorkTests */ = {
+			isa = PBXGroup;
+			children = (
+				D9AF6B5025D0384E00A016DF /* Services */,
+				D9AF6B3325D01DD100A016DF /* Info.plist */,
+			);
+			path = ProductivityInsideTestWorkTests;
+			sourceTree = "<group>";
+		};
+		D9AF6B4425D02CB800A016DF /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				D9AF6B4525D02CCA00A016DF /* Common */,
+				84B338DF25B0C79B0088CCC0 /* StartNewGameModule */,
+				84B338E225B0C8100088CCC0 /* SetNumberToGuessModule */,
+				84B338E125B0C7EF0088CCC0 /* ComputerGuessesNumberModule */,
+				84B338E025B0C7BD0088CCC0 /* UserGuessesNumberModule */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		D9AF6B4525D02CCA00A016DF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D9AF6B4625D02D0400A016DF /* NumberTips.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D9AF6B5025D0384E00A016DF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D9AF6B3125D01DD100A016DF /* ComputerGuessingServiceTests.swift */,
+				D9AF6B4C25D0384600A016DF /* UserGuessingServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,17 +309,39 @@
 			productReference = 84B338C725B022180088CCC0 /* ProductivityInsideTestWork.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D9AF6B2E25D01DD000A016DF /* ProductivityInsideTestWorkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9AF6B3625D01DD100A016DF /* Build configuration list for PBXNativeTarget "ProductivityInsideTestWorkTests" */;
+			buildPhases = (
+				D9AF6B2B25D01DD000A016DF /* Sources */,
+				D9AF6B2C25D01DD000A016DF /* Frameworks */,
+				D9AF6B2D25D01DD000A016DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9AF6B3525D01DD100A016DF /* PBXTargetDependency */,
+			);
+			name = ProductivityInsideTestWorkTests;
+			productName = ProductivityInsideTestWorkTests;
+			productReference = D9AF6B2F25D01DD000A016DF /* ProductivityInsideTestWorkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		84B338BF25B022180088CCC0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					84B338C625B022180088CCC0 = {
 						CreatedOnToolsVersion = 12.3;
+					};
+					D9AF6B2E25D01DD000A016DF = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 84B338C625B022180088CCC0;
 					};
 				};
 			};
@@ -261,6 +359,7 @@
 			projectRoot = "";
 			targets = (
 				84B338C625B022180088CCC0 /* ProductivityInsideTestWork */,
+				D9AF6B2E25D01DD000A016DF /* ProductivityInsideTestWorkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,6 +375,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9AF6B2D25D01DD000A016DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -285,16 +391,19 @@
 			files = (
 				84B3390B25B0DD640088CCC0 /* ComputerGuessesNumberViewModel.swift in Sources */,
 				84ACB43325CB8C5B0019807D /* Constants.swift in Sources */,
-				84B338E625B0C8860088CCC0 /* AbstractFactory.swift in Sources */,
+				84B338E625B0C8860088CCC0 /* ModulesFactory.swift in Sources */,
 				84B338F625B0DC930088CCC0 /* SetNumberToGuessPresenter.swift in Sources */,
+				D9AF6B4725D02D0400A016DF /* NumberTips.swift in Sources */,
 				84B338CF25B022180088CCC0 /* ViewController.swift in Sources */,
 				84B338EF25B0C93A0088CCC0 /* StartNewGameViewModel.swift in Sources */,
 				84B3390825B0DD500088CCC0 /* ComputerGuessesNumberView.swift in Sources */,
+				D9AF6B0925D0103F00A016DF /* ComputerGuessingService.swift in Sources */,
 				84B338F225B0C9520088CCC0 /* StartNewGameView.swift in Sources */,
 				84B338EC25B0C90C0088CCC0 /* StartNewGamePresenter.swift in Sources */,
 				84B338CB25B022180088CCC0 /* AppDelegate.swift in Sources */,
 				84B338FE25B0DCE50088CCC0 /* SetNumberToGuessViewModel.swift in Sources */,
 				84B3390F25B0DD870088CCC0 /* UserGuessesNumberPresenter.swift in Sources */,
+				D9AF6B2625D0195200A016DF /* UserGuessingService.swift in Sources */,
 				84B3391225B0DD9B0088CCC0 /* UserGuessesNumberView.swift in Sources */,
 				84B3391525B0DDAC0088CCC0 /* UserGuessesNumberViewModel.swift in Sources */,
 				84B338CD25B022180088CCC0 /* SceneDelegate.swift in Sources */,
@@ -303,7 +412,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9AF6B2B25D01DD000A016DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9AF6B3225D01DD100A016DF /* ComputerGuessingServiceTests.swift in Sources */,
+				D9AF6B4D25D0384600A016DF /* UserGuessingServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D9AF6B3525D01DD100A016DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84B338C625B022180088CCC0 /* ProductivityInsideTestWork */;
+			targetProxy = D9AF6B3425D01DD100A016DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84B338D025B022180088CCC0 /* Main.storyboard */ = {
@@ -479,6 +605,46 @@
 			};
 			name = Release;
 		};
+		D9AF6B3725D01DD100A016DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ProductivityInsideTestWorkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viktor.ProductivityInsideTestWork.ProductivityInsideTestWorkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProductivityInsideTestWork.app/ProductivityInsideTestWork";
+			};
+			name = Debug;
+		};
+		D9AF6B3825D01DD100A016DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ProductivityInsideTestWorkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viktor.ProductivityInsideTestWork.ProductivityInsideTestWorkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProductivityInsideTestWork.app/ProductivityInsideTestWork";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -496,6 +662,15 @@
 			buildConfigurations = (
 				84B338DC25B022190088CCC0 /* Debug */,
 				84B338DD25B022190088CCC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9AF6B3625D01DD100A016DF /* Build configuration list for PBXNativeTarget "ProductivityInsideTestWorkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9AF6B3725D01DD100A016DF /* Debug */,
+				D9AF6B3825D01DD100A016DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

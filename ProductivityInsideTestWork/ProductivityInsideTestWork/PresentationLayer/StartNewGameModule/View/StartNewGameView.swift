@@ -15,6 +15,7 @@ protocol StartNewGameViewInput : UIViewController  {
 
 protocol StartNewGameViewOutput {
 	func viewDidLoadDone()
+    func onStartButtonTap()
 }
 
 
@@ -48,8 +49,6 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 	}
 
 	@objc func startNewGame(_: UIButton) {
-		let newViewController = AbstractFactory.createSetNumberToGuessModule()
-		self.navigationController?.pushViewController(newViewController, animated: true)
-	}
-	
+        output?.onStartButtonTap()
+	}	
 }

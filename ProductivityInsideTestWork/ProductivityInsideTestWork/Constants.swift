@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Constants {
+enum Constants {
 	static let maxNumber = 100
 	static let minNumber = 0
 }

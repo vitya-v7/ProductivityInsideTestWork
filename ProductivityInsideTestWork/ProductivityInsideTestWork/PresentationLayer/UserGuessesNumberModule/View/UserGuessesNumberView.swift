@@ -14,7 +14,7 @@ protocol UserGuessesNumberViewInput : UIViewController  {
 
 protocol UserGuessesNumberViewOutput {
 	func viewDidLoadDone()
-	func numberWasEntered(number: Int) -> UserGuessesNumberViewModel.NumberTips
+	func numberWasEntered(number: Int)
 }
 
 class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
@@ -31,7 +31,6 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	var viewModel: UserGuessesNumberViewModel?
 
 	func setInitialState() {
-
 		self.youGuesses.text = "You Guesses"
 		self.guessedNumberByGamer.placeholder = "Guess the number"
 		self.acceptNumber.setTitle("Enter the number", for: .normal)
@@ -47,16 +46,11 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
         super.viewDidLoad()
 		acceptNumber.addTarget(self, action: #selector(numberWasEntered(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
-        // Do any additional setup after loading the view.
     }
 
 	@objc func numberWasEntered(_:UIButton) {
-
 		if let number = Int(guessedNumberByGamer.text!) {
-			let tip = output?.numberWasEntered(number: number)
-			viewModel?.numberTip = tip!
-			self.numberTips.text = "Number is " + tip!.rawValue
-			}
+            output?.numberWasEntered(number: number)
+        }
 	}
-
 }
