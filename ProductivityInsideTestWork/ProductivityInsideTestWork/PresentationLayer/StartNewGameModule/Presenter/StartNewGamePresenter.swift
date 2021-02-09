@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 class StartNewGamePresenter: StartNewGameViewOutput {
 
 	weak var view: StartNewGameViewInput?
 	var viewModel: StartNewGameViewModel?
+	var output: IGoToNextScreen?
+	
 	func viewDidLoadDone() {
 		viewModel = StartNewGameViewModel(gamerStatus: .gamer)
 		view?.setViewModel(viewModel: viewModel!)
@@ -18,7 +21,14 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 	}
 
     func onStartButtonTap() {
-        let newViewController = ModulesFactory.createSetNumberToGuessModule()
-        self.view?.navigationController?.pushViewController(newViewController, animated: true)
+        output?.nextScreen()
     }
+}
+
+extension StartNewGamePresenter: INavigationSeed {
+	var vc: UIViewController { return UIViewController() }
+
+	func set<Parameters>(parameters: Parameters?) {
+		output = parameters as? IGoToNextScreen
+	}
 }

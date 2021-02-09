@@ -72,3 +72,7 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 		output?.equalButtonPressed()
 	}
 }
+
+extension ComputerGuessesNumberView: INavigationSeed {
+	var vc: UIViewController { self }
+}

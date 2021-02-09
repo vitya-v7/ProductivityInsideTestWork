@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
@@ -16,6 +17,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	var roundNumber: Int = 1
 	var guessedNumber: Int = 0
 
+	var output: IComputerGuessedNumber?
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
         let computerNumber = computerGuessingService.startGame()
@@ -39,7 +41,14 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	func equalButtonPressed() {
         computerGuessingService.equal()
-        let newViewController = ModulesFactory.createUserGuessesNumberModule()
-		self.view?.navigationController?.pushViewController(newViewController, animated: true)
+		output?.nextScreen()
+	}
+}
+
+extension ComputerGuessesNumberPresenter: INavigationSeed {
+	var vc: UIViewController { return UIViewController() }
+
+	func set<Parameters>(parameters: Parameters?) {
+		output = parameters as? IComputerGuessedNumber
 	}
 }

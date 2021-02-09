@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		84ACB43325CB8C5B0019807D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACB43225CB8C5B0019807D /* Constants.swift */; };
+		84B23A8B25D1396C0028F4DB /* GameRoundsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B23A8A25D1396C0028F4DB /* GameRoundsPresenter.swift */; };
+		84B23A8F25D139B00028F4DB /* GameRoundsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B23A8E25D139B00028F4DB /* GameRoundsController.swift */; };
 		84B338CB25B022180088CCC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338CA25B022180088CCC0 /* AppDelegate.swift */; };
 		84B338CD25B022180088CCC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338CC25B022180088CCC0 /* SceneDelegate.swift */; };
 		84B338CF25B022180088CCC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338CE25B022180088CCC0 /* ViewController.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		84ACB43225CB8C5B0019807D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		84B23A8A25D1396C0028F4DB /* GameRoundsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoundsPresenter.swift; sourceTree = "<group>"; };
+		84B23A8E25D139B00028F4DB /* GameRoundsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoundsController.swift; sourceTree = "<group>"; };
 		84B338C725B022180088CCC0 /* ProductivityInsideTestWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductivityInsideTestWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B338CA25B022180088CCC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84B338CC25B022180088CCC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84B23A8525D1391F0028F4DB /* GameRoundsModule */ = {
+			isa = PBXGroup;
+			children = (
+				84B23A8925D139530028F4DB /* View */,
+				84B23A8825D1394C0028F4DB /* Presenter */,
+			);
+			path = GameRoundsModule;
+			sourceTree = "<group>";
+		};
+		84B23A8825D1394C0028F4DB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				84B23A8A25D1396C0028F4DB /* GameRoundsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		84B23A8925D139530028F4DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84B23A8E25D139B00028F4DB /* GameRoundsController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		84B338BE25B022180088CCC0 = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +292,7 @@
 		D9AF6B4425D02CB800A016DF /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				84B23A8525D1391F0028F4DB /* GameRoundsModule */,
 				D9AF6B4525D02CCA00A016DF /* Common */,
 				84B338DF25B0C79B0088CCC0 /* StartNewGameModule */,
 				84B338E225B0C8100088CCC0 /* SetNumberToGuessModule */,
@@ -389,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B23A8F25D139B00028F4DB /* GameRoundsController.swift in Sources */,
 				84B3390B25B0DD640088CCC0 /* ComputerGuessesNumberViewModel.swift in Sources */,
 				84ACB43325CB8C5B0019807D /* Constants.swift in Sources */,
 				84B338E625B0C8860088CCC0 /* ModulesFactory.swift in Sources */,
@@ -409,6 +440,7 @@
 				84B338CD25B022180088CCC0 /* SceneDelegate.swift in Sources */,
 				84B3390525B0DD3C0088CCC0 /* ComputerGuessesNumberPresenter.swift in Sources */,
 				84B338FB25B0DCD10088CCC0 /* SetNumberToGuessView.swift in Sources */,
+				84B23A8B25D1396C0028F4DB /* GameRoundsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,3 +52,7 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
         output?.onStartButtonTap()
 	}	
 }
+
+extension StartNewGameView: INavigationSeed {
+	var vc: UIViewController { self }
+}

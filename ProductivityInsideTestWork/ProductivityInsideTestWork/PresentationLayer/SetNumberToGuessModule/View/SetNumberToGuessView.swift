@@ -57,3 +57,7 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 		
 	}
 }
+
+extension SetNumberToGuessView: INavigationSeed {
+	var vc: UIViewController { self }
+}

@@ -11,13 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 
-
+	static var coordinatingController = GameRoundsController()
+	
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
-		let startView = ModulesFactory.createStartNewGameModule()
-		let navVc = UINavigationController.init(rootViewController: startView)
+		ModulesFactory.createModules()
+		
 		self.window = UIWindow(windowScene: windowScene)
-		self.window!.rootViewController = navVc
+		self.window!.rootViewController = SceneDelegate.coordinatingController
 		self.window!.makeKeyAndVisible()
 	}
 

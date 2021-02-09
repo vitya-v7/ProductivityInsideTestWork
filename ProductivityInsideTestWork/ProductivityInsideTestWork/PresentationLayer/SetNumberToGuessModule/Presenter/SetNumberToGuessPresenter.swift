@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 
 	weak var view: SetNumberToGuessViewInput?
 	var viewModel: SetNumberToGuessViewModel!
-    
+	var output: IGoToNextScreen?
+	
 	func viewDidLoadDone() {
 		viewModel = SetNumberToGuessViewModel(roundNumber: 0)
 		view?.setViewModel(viewModel: viewModel!)
@@ -20,7 +22,14 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
-		let newViewController = ModulesFactory.createComputerGuessesNumberModule(guessedNumber: number)
-		self.view?.navigationController?.pushViewController(newViewController, animated: true)
+		output?.nextScreen()
+	}
+}
+
+extension SetNumberToGuessPresenter: INavigationSeed {
+	var vc: UIViewController { return UIViewController() }
+
+	func set<Parameters>(parameters: Parameters?) {
+		output = parameters as? IGoToNextScreen
 	}
 }

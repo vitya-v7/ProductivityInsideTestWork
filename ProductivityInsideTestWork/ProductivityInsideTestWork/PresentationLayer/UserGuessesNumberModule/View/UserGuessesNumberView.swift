@@ -54,3 +54,7 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
         }
 	}
 }
+
+extension UserGuessesNumberView: INavigationSeed {
+	var vc: UIViewController { self }
+}
