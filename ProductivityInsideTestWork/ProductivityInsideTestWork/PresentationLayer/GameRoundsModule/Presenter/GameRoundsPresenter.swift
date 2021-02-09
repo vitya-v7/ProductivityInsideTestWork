@@ -10,6 +10,7 @@ import Foundation
 protocol IGoToNextScreen {
 	func nextScreen()
 }
+
 protocol IComputerGuessedNumber: IGoToNextScreen {
 	func setComputerAttempts(attempts: Int)
 }

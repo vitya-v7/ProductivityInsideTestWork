@@ -9,21 +9,23 @@ import Foundation
 import UIKit
 
 class ModulesFactory {
-
-	class func createModules() {
+	static let coordinatingController = GameRoundsController()
+	class func createModules() -> GameRoundsController {
 		createStartNewGameModule()
 		createSetNumberToGuessModule()
 		createComputerGuessesNumberModule()
 		createUserGuessesNumberModule()
-		createGameRoundsModuleAndStart()
+		return createGameRoundsModuleAndStart()
 	}
 
-	class func createGameRoundsModuleAndStart() {
+	class func createGameRoundsModuleAndStart() -> GameRoundsController {
+
 		let coordinationPresenter = GameRoundsPresenter()
 		coordinationPresenter.nextModule = .startNewGameModule
-		coordinationPresenter.gameController = SceneDelegate.coordinatingController
-		SceneDelegate.coordinatingController.output = coordinationPresenter
+		coordinationPresenter.gameController = coordinatingController
+		coordinatingController.output = coordinationPresenter
 		coordinationPresenter.nextScreen()
+		return coordinatingController
 	}
 	
 	class func createStartNewGameModule() {
@@ -33,7 +35,7 @@ class ModulesFactory {
 		let presenter = StartNewGamePresenter()
 		view.output = presenter
 		presenter.view = view
-		SceneDelegate.coordinatingController.registerFirst(module: .startNewGameModule, seed: view)
+		coordinatingController.registerFirst(module: .startNewGameModule, seed: view)
 	}
 
 	class func createSetNumberToGuessModule() {
@@ -43,7 +45,7 @@ class ModulesFactory {
 		let presenter = SetNumberToGuessPresenter()
 		view.output = presenter
 		presenter.view = view
-		SceneDelegate.coordinatingController.register(module: .setNumberToGuessModule, seed: view)
+		coordinatingController.register(module: .setNumberToGuessModule, seed: view)
 	}
 
 	class func createComputerGuessesNumberModule() {
@@ -55,7 +57,7 @@ class ModulesFactory {
 		presenter.view = view
 		//presenter.guessedNumber = guessedNumber
         presenter.computerGuessingService = createComputerGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
-		SceneDelegate.coordinatingController.register(module: .computerGuessesNumberModule, seed: view)
+		coordinatingController.register(module: .computerGuessesNumberModule, seed: view)
 	}
 
 	class func createUserGuessesNumberModule() {
@@ -66,7 +68,7 @@ class ModulesFactory {
 		view.output = presenter
 		presenter.view = view
         presenter.userGuessingService = createUserGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
-		SceneDelegate.coordinatingController.register(module: .userGuessesNumberModule, seed: view)
+		coordinatingController.register(module: .userGuessesNumberModule, seed: view)
 	}
 
 	class func createComputerGuessingService(minNumber: Int, maxNumber: Int) -> ComputerGuessingService {
