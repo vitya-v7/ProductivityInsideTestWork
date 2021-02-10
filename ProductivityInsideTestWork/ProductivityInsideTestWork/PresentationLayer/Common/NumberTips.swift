@@ -8,9 +8,9 @@
 import Foundation
 
 enum NumberTips: String {
-    case greater = ">"
-    case less = "<"
-    case equal = "="
-    case none = ""
-    case outOfInteval = "out of interval"
+	case greater = ">"
+	case less = "<"
+	case equal = "="
+	case none = ""
+	case outOfInteval = "out of interval"
 }

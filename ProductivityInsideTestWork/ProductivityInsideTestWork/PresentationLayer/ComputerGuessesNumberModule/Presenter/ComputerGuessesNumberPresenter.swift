@@ -12,15 +12,14 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	weak var view: ComputerGuessesNumberViewInput?
 	var viewModel: ComputerGuessesNumberViewModel?
-    var computerGuessingService: ComputerGuessingServiceInterface!
-
+	var computerGuessingService: ComputerGuessingServiceInterface!
 	var roundNumber: Int = 0
 	var guessedNumber: Int = 0
-
 	var moduleOutput: IComputerGuessedNumber?
+
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
-        let computerNumber = computerGuessingService.startGame()
+		let computerNumber = computerGuessingService.startGame()
 		viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber, guessedNumberByComputer: computerNumber)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
@@ -32,20 +31,20 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func greaterButtonPressed() {
-        let computerNumber = computerGuessingService.greater()
-        viewModel?.guessedNumberByComputer = computerNumber
+		let computerNumber = computerGuessingService.greater()
+		viewModel?.guessedNumberByComputer = computerNumber
 		view?.setViewModel(viewModel: viewModel!)
 	}
 
 	func lessButtonPressed() {
-        let computerNumber = computerGuessingService.less()
+		let computerNumber = computerGuessingService.less()
 		viewModel?.guessedNumberByComputer = computerNumber
 		view?.setViewModel(viewModel: viewModel!)
 	}
 
 	func equalButtonPressed() {
-        computerGuessingService.equal()
-		moduleOutput?.setComputerAttempts(attempts: computerGuessingService.attempts)
+		computerGuessingService.equal()
+		moduleOutput?.computerEndedItsTurn(attempts: computerGuessingService.attempts)
 		moduleOutput?.nextScreen()
 	}
 

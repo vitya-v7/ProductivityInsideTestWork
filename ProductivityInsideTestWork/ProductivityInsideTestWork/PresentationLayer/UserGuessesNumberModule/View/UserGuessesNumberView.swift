@@ -23,12 +23,10 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 
 	@IBOutlet weak var roundNumber: UILabel!
 	@IBOutlet weak var youGuesses: UILabel!
-
 	@IBOutlet weak var guessedNumberByGamer: UITextField!
-
 	@IBOutlet weak var numberTips: UILabel!
-	
 	@IBOutlet weak var acceptNumber: UIButton!
+
 	var output: UserGuessesNumberViewOutput?
 	var viewModel: UserGuessesNumberViewModel?
 
@@ -44,16 +42,16 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 		self.roundNumber.text = "Round №" + String(viewModel.roundNumber)
 	}
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		acceptNumber.addTarget(self, action: #selector(numberWasEntered(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
-    }
+	}
 
 	@objc func numberWasEntered(_:UIButton) {
 		if let number = Int(guessedNumberByGamer.text!) {
-            output?.numberWasEntered(number: number)
-        }
+			output?.numberWasEntered(number: number)
+		}
 	}
 }
 

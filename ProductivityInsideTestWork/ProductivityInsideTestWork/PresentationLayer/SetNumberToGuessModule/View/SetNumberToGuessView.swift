@@ -26,7 +26,6 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 	@IBOutlet weak var acceptNumber: UIButton!
 
 	var output: SetNumberToGuessViewOutput?
-
 	var viewModel:SetNumberToGuessViewModel?
 
 	func setInitialState() {
@@ -43,12 +42,12 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 		self.enterNumber.placeholder = "Введите число"
 	}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		navigationController?.navigationItem.setHidesBackButton(true, animated: false)
 		acceptNumber.addTarget(self, action: #selector(numberWasAccepted(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
-    }
+	}
 
 	@objc func numberWasAccepted(_: UIButton) {
 		let number = Int(enterNumber.text!)

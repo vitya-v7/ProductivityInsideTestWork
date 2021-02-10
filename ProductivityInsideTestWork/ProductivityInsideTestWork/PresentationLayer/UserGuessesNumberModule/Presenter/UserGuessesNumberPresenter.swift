@@ -9,17 +9,15 @@ import Foundation
 import UIKit
 
 class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
-
-
-
+	
 	weak var view: UserGuessesNumberViewInput?
 	var viewModel: UserGuessesNumberViewModel!
-    var userGuessingService: UserGuessingServiceInterface!
+	var userGuessingService: UserGuessingServiceInterface!
 	var roundNumber: Int = 0
 	var moduleOutput: IUserGuessedNumber?
 
 	func viewDidLoadDone() {
-        userGuessingService.startGame()
+		userGuessingService.startGame()
 		viewModel = UserGuessesNumberViewModel(roundNumber: roundNumber, numberTip: .none)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
@@ -30,14 +28,14 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	}
 
 	func numberWasEntered(number: Int) {
-        let result = userGuessingService.numberWasEntered(number: number)
-        if result == .equal {
-			moduleOutput?.setUserAttempts(attempts: userGuessingService.attempts)
+		let result = userGuessingService.numberWasEntered(number: number)
+		if result == .equal {
+			moduleOutput?.userEndedHisTurn(attempts: userGuessingService.attempts)
 			moduleOutput?.nextScreen()
-        } else {
-            viewModel = UserGuessesNumberViewModel(roundNumber: viewModel.roundNumber, numberTip: result)
-            view?.setViewModel(viewModel: viewModel!)
-        }
+		} else {
+			viewModel = UserGuessesNumberViewModel(roundNumber: viewModel.roundNumber, numberTip: result)
+			view?.setViewModel(viewModel: viewModel!)
+		}
 	}
 
 	func setModuleOutput(moduleOutput: IUserGuessedNumber) {

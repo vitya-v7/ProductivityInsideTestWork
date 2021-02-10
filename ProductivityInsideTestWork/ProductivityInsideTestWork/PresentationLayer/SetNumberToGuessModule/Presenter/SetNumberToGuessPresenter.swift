@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
-
+	
 	weak var view: SetNumberToGuessViewInput?
 	var viewModel: SetNumberToGuessViewModel!
 	var moduleOutput: IGoToNextScreen?
@@ -19,7 +19,7 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
 	}
-
+	
 	func setRoundNumber(roundNumber: Int) {
 		self.roundNumber = roundNumber
 	}
@@ -27,10 +27,6 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
 		moduleOutput?.nextScreen()
-	}
-
-	func setModuleOutput(moduleOutput: IGoToNextScreen) {
-		self.moduleOutput = moduleOutput
 	}
 }
 

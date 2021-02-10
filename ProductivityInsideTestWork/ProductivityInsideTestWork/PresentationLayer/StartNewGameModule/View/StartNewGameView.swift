@@ -15,42 +15,37 @@ protocol StartNewGameViewInput : UIViewController  {
 
 protocol StartNewGameViewOutput {
 	func viewDidLoadDone()
-    func onStartButtonTap()
+	func onStartButtonTap()
 	func setModuleOutput(moduleOutput: IGoToNextScreen)
 	func setGameState(state: GameState)
 }
 
-
 class StartNewGameView: UIViewController, StartNewGameViewInput {
+	
 	@IBOutlet weak var gameName: UILabel!
-
 	@IBOutlet weak var gameResults: UILabel!
-
 	@IBOutlet weak var startNewGameButton: UIButton!
-
+	
 	var output: StartNewGameViewOutput?
-
 	var viewModel: StartNewGameViewModel?
-
-	func setInitialState() {
-		
-	}
-
+	
+	func setInitialState() {}
+	
 	func setViewModel(viewModel: StartNewGameViewModel) {
 		self.viewModel = viewModel
 		gameName.text = viewModel.title
 		gameResults.text = viewModel.gameState.rawValue
 		startNewGameButton.setTitle(viewModel.buttonLabel, for: .normal)
 	}
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		startNewGameButton.addTarget(self, action: #selector(startNewGame(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
 	}
-
+	
 	@objc func startNewGame(_: UIButton) {
-        output?.onStartButtonTap()
+		output?.onStartButtonTap()
 	}	
 }
 

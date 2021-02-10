@@ -21,12 +21,8 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 		view?.setInitialState()
 	}
 
-    func onStartButtonTap() {
+	func onStartButtonTap() {
 		moduleOutput?.nextScreen()
-    }
-
-	func setModuleOutput(moduleOutput: IGoToNextScreen) {
-		self.moduleOutput = moduleOutput
 	}
 
 	func setGameState(state: GameState) {

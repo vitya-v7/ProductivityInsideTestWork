@@ -8,11 +8,11 @@
 import Foundation
 
 class StartNewGameViewModel {
-
+	
 	let title: String
 	let gameState: GameState
 	let buttonLabel = "Start New Game"
-
+	
 	init(gameState: GameState = .newGame) {
 		self.gameState = gameState
 		if self.gameState != .newGame {

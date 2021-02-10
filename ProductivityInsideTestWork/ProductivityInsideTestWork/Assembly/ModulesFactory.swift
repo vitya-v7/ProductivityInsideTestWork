@@ -12,6 +12,7 @@ class ModulesFactory {
 	
 	class func createGameRoundsModuleAndStart() -> GameRoundsController {
 		let navVc = GameRoundsController()
+		navVc.keyboardPreferences()
 		let presenter = GameRoundsPresenter()
 		presenter.nextModule = .startNewGameModule
 		presenter.gameController = navVc
@@ -21,7 +22,7 @@ class ModulesFactory {
 	
 	class func createStartNewGameModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
-        let view = storyboard.instantiateViewController(identifier: ModulesConstants.startNewGameViewIdentifier) as! StartNewGameView
+		let view = storyboard.instantiateViewController(identifier: ModulesConstants.startNewGameViewIdentifier) as! StartNewGameView
 
 		let presenter = StartNewGamePresenter()
 		view.output = presenter
@@ -31,7 +32,7 @@ class ModulesFactory {
 
 	class func createSetNumberToGuessModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
-        let view = storyboard.instantiateViewController(identifier: ModulesConstants.setNumberToGuessViewIdentifier) as! SetNumberToGuessView
+		let view = storyboard.instantiateViewController(identifier: ModulesConstants.setNumberToGuessViewIdentifier) as! SetNumberToGuessView
 
 		let presenter = SetNumberToGuessPresenter()
 		view.output = presenter
@@ -41,44 +42,43 @@ class ModulesFactory {
 
 	class func createComputerGuessesNumberModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
-        let view = storyboard.instantiateViewController(identifier: ModulesConstants.computerGuessesNumberViewIdentifier) as! ComputerGuessesNumberView
+		let view = storyboard.instantiateViewController(identifier: ModulesConstants.computerGuessesNumberViewIdentifier) as! ComputerGuessesNumberView
 
 		let presenter = ComputerGuessesNumberPresenter()
 		view.output = presenter
 		presenter.view = view
-		//presenter.guessedNumber = guessedNumber
-        presenter.computerGuessingService = createComputerGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
+		presenter.computerGuessingService = createComputerGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
 		return view
 	}
 
 	class func createUserGuessesNumberModule() -> UIViewController {
-        let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
-        let view = storyboard.instantiateViewController(identifier: ModulesConstants.userGuessesNumberViewIdentifier) as! UserGuessesNumberView
+		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
+		let view = storyboard.instantiateViewController(identifier: ModulesConstants.userGuessesNumberViewIdentifier) as! UserGuessesNumberView
 
 		let presenter = UserGuessesNumberPresenter()
 		view.output = presenter
 		presenter.view = view
-        presenter.userGuessingService = createUserGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
+		presenter.userGuessingService = createUserGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
 		return view
 	}
 
 	class func createComputerGuessingService(minNumber: Int, maxNumber: Int) -> ComputerGuessingService {
-        return ComputerGuessingService(minNumber: minNumber, maxNumber: maxNumber);
-    }
+		return ComputerGuessingService(minNumber: minNumber, maxNumber: maxNumber);
+	}
 
 	class func createUserGuessingService(minNumber: Int, maxNumber: Int) -> UserGuessingService {
-        return UserGuessingService(minNumber: minNumber, maxNumber: maxNumber);
-    }
+		return UserGuessingService(minNumber: minNumber, maxNumber: maxNumber);
+	}
 }
 
 private extension ModulesFactory {
-    // MARK: - Constants
+	// MARK: - Constants
 
-    enum ModulesConstants {
-        static let mainStoriboardName:String = "Main"
-        static let startNewGameViewIdentifier:String = "StartNewGameViewIdentifier"
-        static let setNumberToGuessViewIdentifier:String = "SetNumberToGuessViewIdentifier"
-        static let computerGuessesNumberViewIdentifier:String = "ComputerGuessesNumberViewIdentifier"
-        static let userGuessesNumberViewIdentifier:String = "UserGuessesNumberViewIdentifier"
-    }
+	enum ModulesConstants {
+		static let mainStoriboardName:String = "Main"
+		static let startNewGameViewIdentifier:String = "StartNewGameViewIdentifier"
+		static let setNumberToGuessViewIdentifier:String = "SetNumberToGuessViewIdentifier"
+		static let computerGuessesNumberViewIdentifier:String = "ComputerGuessesNumberViewIdentifier"
+		static let userGuessesNumberViewIdentifier:String = "UserGuessesNumberViewIdentifier"
+	}
 }
