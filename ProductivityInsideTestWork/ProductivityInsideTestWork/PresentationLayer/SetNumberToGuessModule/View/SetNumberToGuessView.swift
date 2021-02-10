@@ -15,6 +15,7 @@ protocol SetNumberToGuessViewInput : UIViewController  {
 protocol SetNumberToGuessViewOutput {
 	func viewDidLoadDone()
 	func numberWasEntered(number: Int)
+	func setModuleOutput(moduleOutput: IGoToNextScreen)
 }
 
 class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
@@ -56,8 +57,4 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 		output?.numberWasEntered(number: number!)
 		
 	}
-}
-
-extension SetNumberToGuessView: INavigationSeed {
-	var vc: UIViewController { self }
 }

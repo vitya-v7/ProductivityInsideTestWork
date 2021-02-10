@@ -17,7 +17,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	var roundNumber: Int = 1
 	var guessedNumber: Int = 0
 
-	var output: IComputerGuessedNumber?
+	var moduleOutput: IComputerGuessedNumber?
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
         let computerNumber = computerGuessingService.startGame()
@@ -41,14 +41,11 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	func equalButtonPressed() {
         computerGuessingService.equal()
-		output?.nextScreen()
+		moduleOutput?.setComputerAttempts(attempts: computerGuessingService.attempts)
+		moduleOutput?.nextScreen()
 	}
-}
 
-extension ComputerGuessesNumberPresenter: INavigationSeed {
-	var vc: UIViewController { return UIViewController() }
-
-	func set<Parameters>(parameters: Parameters?) {
-		output = parameters as? IComputerGuessedNumber
+	func setModuleOutput(moduleOutput: IComputerGuessedNumber) {
+		self.moduleOutput = moduleOutput
 	}
 }

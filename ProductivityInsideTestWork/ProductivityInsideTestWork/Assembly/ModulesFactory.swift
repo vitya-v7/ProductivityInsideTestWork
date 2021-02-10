@@ -9,46 +9,37 @@ import Foundation
 import UIKit
 
 class ModulesFactory {
-	static let coordinatingController = GameRoundsController()
-	class func createModules() -> GameRoundsController {
-		createStartNewGameModule()
-		createSetNumberToGuessModule()
-		createComputerGuessesNumberModule()
-		createUserGuessesNumberModule()
-		return createGameRoundsModuleAndStart()
-	}
-
+	
 	class func createGameRoundsModuleAndStart() -> GameRoundsController {
-
-		let coordinationPresenter = GameRoundsPresenter()
-		coordinationPresenter.nextModule = .startNewGameModule
-		coordinationPresenter.gameController = coordinatingController
-		coordinatingController.output = coordinationPresenter
-		coordinationPresenter.nextScreen()
-		return coordinatingController
+		let navVc = GameRoundsController()
+		let presenter = GameRoundsPresenter()
+		presenter.nextModule = .startNewGameModule
+		presenter.gameController = navVc
+		presenter.nextScreen()
+		return navVc
 	}
 	
-	class func createStartNewGameModule() {
+	class func createStartNewGameModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
         let view = storyboard.instantiateViewController(identifier: ModulesConstants.startNewGameViewIdentifier) as! StartNewGameView
 
 		let presenter = StartNewGamePresenter()
 		view.output = presenter
 		presenter.view = view
-		coordinatingController.registerFirst(module: .startNewGameModule, seed: view)
+		return view
 	}
 
-	class func createSetNumberToGuessModule() {
+	class func createSetNumberToGuessModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
         let view = storyboard.instantiateViewController(identifier: ModulesConstants.setNumberToGuessViewIdentifier) as! SetNumberToGuessView
 
 		let presenter = SetNumberToGuessPresenter()
 		view.output = presenter
 		presenter.view = view
-		coordinatingController.register(module: .setNumberToGuessModule, seed: view)
+		return view
 	}
 
-	class func createComputerGuessesNumberModule() {
+	class func createComputerGuessesNumberModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
         let view = storyboard.instantiateViewController(identifier: ModulesConstants.computerGuessesNumberViewIdentifier) as! ComputerGuessesNumberView
 
@@ -57,10 +48,10 @@ class ModulesFactory {
 		presenter.view = view
 		//presenter.guessedNumber = guessedNumber
         presenter.computerGuessingService = createComputerGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
-		coordinatingController.register(module: .computerGuessesNumberModule, seed: view)
+		return view
 	}
 
-	class func createUserGuessesNumberModule() {
+	class func createUserGuessesNumberModule() -> UIViewController {
         let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
         let view = storyboard.instantiateViewController(identifier: ModulesConstants.userGuessesNumberViewIdentifier) as! UserGuessesNumberView
 
@@ -68,7 +59,7 @@ class ModulesFactory {
 		view.output = presenter
 		presenter.view = view
         presenter.userGuessingService = createUserGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
-		coordinatingController.register(module: .userGuessesNumberModule, seed: view)
+		return view
 	}
 
 	class func createComputerGuessingService(minNumber: Int, maxNumber: Int) -> ComputerGuessingService {

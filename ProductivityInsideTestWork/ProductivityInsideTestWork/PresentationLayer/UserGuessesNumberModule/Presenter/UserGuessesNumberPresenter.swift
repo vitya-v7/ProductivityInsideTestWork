@@ -10,11 +10,13 @@ import UIKit
 
 class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 
+
+
 	weak var view: UserGuessesNumberViewInput?
 	var viewModel: UserGuessesNumberViewModel!
     var userGuessingService: UserGuessingServiceInterface!
 
-	var output: IUserGuessedNumber?
+	var moduleOutput: IUserGuessedNumber?
 
 	func viewDidLoadDone() {
         userGuessingService.startGame()
@@ -26,18 +28,15 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	func numberWasEntered(number: Int) {
         let result = userGuessingService.numberWasEntered(number: number)
         if result == .equal {
-			output?.nextScreen()
+			moduleOutput?.setUserAttempts(attempts: userGuessingService.attempts)
+			moduleOutput?.nextScreen()
         } else {
             viewModel = UserGuessesNumberViewModel(roundNumber: viewModel.roundNumber, numberTip: result)
             view?.setViewModel(viewModel: viewModel!)
         }
 	}
-}
 
-extension UserGuessesNumberPresenter: INavigationSeed {
-	var vc: UIViewController { return UIViewController() }
-
-	func set<Parameters>(parameters: Parameters?) {
-		output = parameters as? IUserGuessedNumber
+	func setModuleOutput(moduleOutput: IUserGuessedNumber) {
+		self.moduleOutput = moduleOutput
 	}
 }

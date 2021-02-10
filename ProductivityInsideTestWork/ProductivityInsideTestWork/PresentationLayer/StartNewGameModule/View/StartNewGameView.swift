@@ -16,6 +16,8 @@ protocol StartNewGameViewInput : UIViewController  {
 protocol StartNewGameViewOutput {
 	func viewDidLoadDone()
     func onStartButtonTap()
+	func setModuleOutput(moduleOutput: IGoToNextScreen)
+	func setGameState(state: GameState)
 }
 
 
@@ -37,7 +39,7 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 	func setViewModel(viewModel: StartNewGameViewModel) {
 		self.viewModel = viewModel
 		gameName.text = viewModel.title
-		gameResults.text = viewModel.gamerStatus.rawValue
+		gameResults.text = viewModel.gameState.rawValue
 		startNewGameButton.setTitle(viewModel.buttonLabel, for: .normal)
 	}
 
@@ -45,7 +47,6 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 		super.viewDidLoad()
 		startNewGameButton.addTarget(self, action: #selector(startNewGame(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
-		// Do any additional setup after loading the view.
 	}
 
 	@objc func startNewGame(_: UIButton) {
@@ -53,6 +54,3 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 	}	
 }
 
-extension StartNewGameView: INavigationSeed {
-	var vc: UIViewController { self }
-}

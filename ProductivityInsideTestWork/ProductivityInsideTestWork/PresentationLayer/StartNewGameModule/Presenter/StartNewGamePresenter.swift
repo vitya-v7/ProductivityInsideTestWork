@@ -12,23 +12,26 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 
 	weak var view: StartNewGameViewInput?
 	var viewModel: StartNewGameViewModel?
-	var output: IGoToNextScreen?
+	var moduleOutput: IGoToNextScreen?
+	var moduleState: GameState?
 	
 	func viewDidLoadDone() {
-		viewModel = StartNewGameViewModel(gamerStatus: .gamer)
+		viewModel = StartNewGameViewModel(gameState: moduleState ?? .newGame)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
 	}
 
     func onStartButtonTap() {
-        output?.nextScreen()
+		moduleOutput?.nextScreen()
     }
-}
 
-extension StartNewGamePresenter: INavigationSeed {
-	var vc: UIViewController { return UIViewController() }
+	func setModuleOutput(moduleOutput: IGoToNextScreen) {
+		self.moduleOutput = moduleOutput
+	}
 
-	func set<Parameters>(parameters: Parameters?) {
-		output = parameters as? IGoToNextScreen
+	func setGameState(state: GameState) {
+		moduleState = state
+
 	}
 }
+

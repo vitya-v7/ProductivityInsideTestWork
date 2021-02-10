@@ -17,6 +17,7 @@ protocol ComputerGuessesNumberViewOutput {
 	func greaterButtonPressed()
 	func lessButtonPressed()
 	func equalButtonPressed()
+	func setModuleOutput(moduleOutput: IComputerGuessedNumber)
 }
 
 class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInput {
@@ -73,6 +74,3 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 	}
 }
 
-extension ComputerGuessesNumberView: INavigationSeed {
-	var vc: UIViewController { self }
-}

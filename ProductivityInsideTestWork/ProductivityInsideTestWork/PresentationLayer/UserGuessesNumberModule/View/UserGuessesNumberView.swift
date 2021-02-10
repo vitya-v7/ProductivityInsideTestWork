@@ -15,6 +15,7 @@ protocol UserGuessesNumberViewInput : UIViewController  {
 protocol UserGuessesNumberViewOutput {
 	func viewDidLoadDone()
 	func numberWasEntered(number: Int)
+	func setModuleOutput(moduleOutput: IUserGuessedNumber)
 }
 
 class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
@@ -55,6 +56,3 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	}
 }
 
-extension UserGuessesNumberView: INavigationSeed {
-	var vc: UIViewController { self }
-}

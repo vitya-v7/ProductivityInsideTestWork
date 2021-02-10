@@ -13,9 +13,16 @@ enum Constants {
 	static let totalRoundNumber = 5
 	static let numberOfRecyclingViews = 3
 }
-enum NavigationModule: Int {
+
+public enum NavigationModule: Int {
 	case startNewGameModule = 0
 	case setNumberToGuessModule = 1
 	case computerGuessesNumberModule = 2
 	case userGuessesNumberModule = 3
+}
+
+public enum GameState: String {
+	case win = "You win"
+	case lose = "You lose"
+	case newGame = ""
 }

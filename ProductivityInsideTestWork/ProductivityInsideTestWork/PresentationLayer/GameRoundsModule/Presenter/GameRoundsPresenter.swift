@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol IGoToNextScreen {
 	func nextScreen()
@@ -29,21 +30,28 @@ class GameRoundsPresenter: IGoToNextScreen {
 	var nextModule: NavigationModule = .startNewGameModule
 	var roundEnded = false
 
+	func getModuleByEnum(moduleName: NavigationModule) -> UIViewController {
+		switch moduleName {
+		case .startNewGameModule:
+			return ModulesFactory.createStartNewGameModule()
+		case .setNumberToGuessModule:
+			return ModulesFactory.createSetNumberToGuessModule()
+		case .computerGuessesNumberModule:
+			return ModulesFactory.createComputerGuessesNumberModule()
+		case .userGuessesNumberModule:
+			return ModulesFactory.createUserGuessesNumberModule()
+		}
+	}
+
+
 	func nextScreen() {
 		if !roundEnded && nextModule.rawValue <= Constants.numberOfRecyclingViews {
-
-			if nextModule == .computerGuessesNumberModule {
-				gameController?.push(module: nextModule, parameters: self as IComputerGuessedNumber, animated: true)
+			if nextModule == .startNewGameModule {
+				pushNextScreen(nextModule: nextModule, parameters: GameState.newGame)
 			}
-
-			else if nextModule == .userGuessesNumberModule {
-				gameController?.push(module: nextModule, parameters: self as IUserGuessedNumber, animated: true)
-			}
-
 			else {
-				gameController?.push(module: nextModule, parameters: self as IGoToNextScreen, animated: true)
+				pushNextScreen(nextModule: nextModule)
 			}
-
 			if nextModule.rawValue == Constants.numberOfRecyclingViews {
 				roundEnded = true
 				roundNumber = roundNumber + 1
@@ -56,7 +64,7 @@ class GameRoundsPresenter: IGoToNextScreen {
 		else {
 			roundEnded = false
 			for _ in 0 ..< Constants.numberOfRecyclingViews {
-				gameController?.back(animated: false)
+				gameController?.resetControllersAndStartNewRound()
 			}
 			if roundNumber < Constants.totalRoundNumber {
 				if computerAttemptsInCurrentRound > userAttemptsInCurrentRound {
@@ -66,13 +74,36 @@ class GameRoundsPresenter: IGoToNextScreen {
 					userWins = userWins + 1
 				}
 				nextModule = NavigationModule.setNumberToGuessModule
-				gameController?.push(module: nextModule, parameters: self as IGoToNextScreen, animated: true)
+				pushNextScreen(nextModule: nextModule)
 			}
 			else {
 				nextModule = NavigationModule.startNewGameModule
-				gameController?.push(module: nextModule, parameters: self as IGoToNextScreen, animated: true)
+				if computerWins > userWins {
+					pushNextScreen(nextModule: nextModule, parameters: GameState.lose)
+				}
+				else {
+					pushNextScreen(nextModule: nextModule, parameters: GameState.win)
+				}
 			}
 		}
+	}
+
+	func pushNextScreen(nextModule: NavigationModule, parameters: Any? = nil) {
+		let moduleView = getModuleByEnum(moduleName: nextModule)
+
+		switch nextModule {
+		case .computerGuessesNumberModule:
+			(moduleView as! ComputerGuessesNumberView).output!.setModuleOutput(moduleOutput: self as IComputerGuessedNumber)
+		case .userGuessesNumberModule:
+			(moduleView as! UserGuessesNumberView).output!.setModuleOutput(moduleOutput: self as IUserGuessedNumber)
+		case .setNumberToGuessModule:
+			(moduleView as! SetNumberToGuessView).output!.setModuleOutput(moduleOutput: self as IGoToNextScreen)
+		case .startNewGameModule:
+			let startView = (moduleView as! StartNewGameView)
+			startView.output?.setGameState(state: parameters as! GameState)
+			startView.output?.setModuleOutput(moduleOutput: self as IGoToNextScreen)
+		}
+		gameController?.pushNextModule(view: moduleView, animated: true)
 	}
 }
 
