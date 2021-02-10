@@ -63,11 +63,9 @@ class GameRoundsPresenter: IGoToNextScreen {
 		}
 		else {
 			roundEnded = false
-			for _ in 0 ..< Constants.numberOfRecyclingViews {
-				gameController?.resetControllersAndStartNewRound()
-			}
+			gameController?.resetControllersAndStartNewRound()
 			if roundNumber < Constants.totalRoundNumber {
-				if computerAttemptsInCurrentRound > userAttemptsInCurrentRound {
+				if computerAttemptsInCurrentRound < userAttemptsInCurrentRound {
 					computerWins = computerWins + 1
 				}
 				else {
@@ -93,11 +91,17 @@ class GameRoundsPresenter: IGoToNextScreen {
 
 		switch nextModule {
 		case .computerGuessesNumberModule:
-			(moduleView as! ComputerGuessesNumberView).output!.setModuleOutput(moduleOutput: self as IComputerGuessedNumber)
+			let viewIn = (moduleView as! ComputerGuessesNumberView)
+			viewIn.output?.setRoundNumber(roundNumber: roundNumber)
+			viewIn.output?.setModuleOutput(moduleOutput: self as IComputerGuessedNumber)
 		case .userGuessesNumberModule:
-			(moduleView as! UserGuessesNumberView).output!.setModuleOutput(moduleOutput: self as IUserGuessedNumber)
+			let viewIn = (moduleView as! UserGuessesNumberView)
+			viewIn.output?.setRoundNumber(roundNumber: roundNumber)
+			viewIn.output?.setModuleOutput(moduleOutput: self as IUserGuessedNumber)
 		case .setNumberToGuessModule:
-			(moduleView as! SetNumberToGuessView).output!.setModuleOutput(moduleOutput: self as IGoToNextScreen)
+			let viewIn = (moduleView as! SetNumberToGuessView)
+			viewIn.output?.setRoundNumber(roundNumber: roundNumber)
+			viewIn.output?.setModuleOutput(moduleOutput: self as IGoToNextScreen)
 		case .startNewGameModule:
 			let startView = (moduleView as! StartNewGameView)
 			startView.output?.setGameState(state: parameters as! GameState)

@@ -15,14 +15,18 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	weak var view: UserGuessesNumberViewInput?
 	var viewModel: UserGuessesNumberViewModel!
     var userGuessingService: UserGuessingServiceInterface!
-
+	var roundNumber: Int = 0
 	var moduleOutput: IUserGuessedNumber?
 
 	func viewDidLoadDone() {
         userGuessingService.startGame()
-		viewModel = UserGuessesNumberViewModel(roundNumber: 0, numberTip: .none)
+		viewModel = UserGuessesNumberViewModel(roundNumber: roundNumber, numberTip: .none)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
+	}
+
+	func setRoundNumber(roundNumber: Int) {
+		self.roundNumber = roundNumber
 	}
 
 	func numberWasEntered(number: Int) {

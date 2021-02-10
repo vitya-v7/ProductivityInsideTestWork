@@ -14,7 +14,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	var viewModel: ComputerGuessesNumberViewModel?
     var computerGuessingService: ComputerGuessingServiceInterface!
 
-	var roundNumber: Int = 1
+	var roundNumber: Int = 0
 	var guessedNumber: Int = 0
 
 	var moduleOutput: IComputerGuessedNumber?
@@ -26,6 +26,10 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 		view?.setInitialState()
 	}
 
+	func setRoundNumber(roundNumber: Int) {
+		self.roundNumber = roundNumber
+	}
+	
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func greaterButtonPressed() {
         let computerNumber = computerGuessingService.greater()

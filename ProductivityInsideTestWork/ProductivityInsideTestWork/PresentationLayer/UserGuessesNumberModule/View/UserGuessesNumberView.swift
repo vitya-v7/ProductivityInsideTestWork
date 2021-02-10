@@ -16,6 +16,7 @@ protocol UserGuessesNumberViewOutput {
 	func viewDidLoadDone()
 	func numberWasEntered(number: Int)
 	func setModuleOutput(moduleOutput: IUserGuessedNumber)
+	func setRoundNumber(roundNumber: Int)
 }
 
 class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {

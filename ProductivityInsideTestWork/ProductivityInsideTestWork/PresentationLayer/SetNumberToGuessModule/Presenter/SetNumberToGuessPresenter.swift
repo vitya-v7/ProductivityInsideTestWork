@@ -13,13 +13,17 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	weak var view: SetNumberToGuessViewInput?
 	var viewModel: SetNumberToGuessViewModel!
 	var moduleOutput: IGoToNextScreen?
-	
+	var roundNumber = 0
 	func viewDidLoadDone() {
-		viewModel = SetNumberToGuessViewModel(roundNumber: 0)
+		viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
 	}
 
+	func setRoundNumber(roundNumber: Int) {
+		self.roundNumber = roundNumber
+	}
+	
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
 		moduleOutput?.nextScreen()
