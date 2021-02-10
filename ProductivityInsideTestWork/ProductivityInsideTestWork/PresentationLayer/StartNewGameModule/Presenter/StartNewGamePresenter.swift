@@ -12,7 +12,7 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 
 	weak var view: StartNewGameViewInput?
 	var viewModel: StartNewGameViewModel?
-	var moduleOutput: IGoToNextScreen?
+	var moduleOutput: IGoTomoduleComplete?
 	var moduleState: GameState?
 	
 	func viewDidLoadDone() {
@@ -22,7 +22,7 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 	}
 
 	func onStartButtonTap() {
-		moduleOutput?.nextScreen()
+		moduleOutput?.moduleComplete()
 	}
 
 	func setGameState(state: GameState) {

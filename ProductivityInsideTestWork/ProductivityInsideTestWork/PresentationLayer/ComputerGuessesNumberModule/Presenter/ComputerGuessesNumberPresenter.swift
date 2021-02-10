@@ -15,7 +15,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	var computerGuessingService: ComputerGuessingServiceInterface!
 	var roundNumber: Int = 0
 	var guessedNumber: Int = 0
-	var moduleOutput: IComputerGuessedNumber?
+	var moduleOutput: (IComputerGuessedNumber & IGoTomoduleComplete)?
 
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
@@ -45,10 +45,6 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	func equalButtonPressed() {
 		computerGuessingService.equal()
 		moduleOutput?.computerEndedItsTurn(attempts: computerGuessingService.attempts)
-		moduleOutput?.nextScreen()
-	}
-
-	func setModuleOutput(moduleOutput: IComputerGuessedNumber) {
-		self.moduleOutput = moduleOutput
+		moduleOutput?.moduleComplete()
 	}
 }

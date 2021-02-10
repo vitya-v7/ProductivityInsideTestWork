@@ -16,7 +16,7 @@ class ModulesFactory {
 		let presenter = GameRoundsPresenter()
 		presenter.nextModule = .startNewGameModule
 		presenter.gameController = navVc
-		presenter.nextScreen()
+		presenter.moduleComplete()
 		return navVc
 	}
 	

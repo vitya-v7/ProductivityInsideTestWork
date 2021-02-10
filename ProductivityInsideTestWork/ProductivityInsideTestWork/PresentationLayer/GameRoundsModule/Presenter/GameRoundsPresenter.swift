@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 
-protocol IGoToNextScreen {
-	func nextScreen()
+protocol IGoTomoduleComplete {
+	func moduleComplete()
 }
 
-protocol IComputerGuessedNumber: IGoToNextScreen {
+protocol IComputerGuessedNumber {
 	func computerEndedItsTurn(attempts: Int)
 }
 
-protocol IUserGuessedNumber: IGoToNextScreen {
+protocol IUserGuessedNumber {
 	func userEndedHisTurn(attempts: Int)
 }
 
-class GameRoundsPresenter: IGoToNextScreen {
+class GameRoundsPresenter {
 	var roundNumber = Constants.startRound
 	var computerWins = 0
 	var userWins = 0
@@ -47,7 +47,42 @@ class GameRoundsPresenter: IGoToNextScreen {
 		return !roundEnded && nextModule.rawValue <= Constants.numberOfRecyclingViews
 	}
 
-	func nextScreen() {
+
+	func getNextModuleEnum(currentModule: NavigationModule) -> NavigationModule {
+		var nextModule = currentModule
+		if currentModule.rawValue < Constants.numberOfRecyclingViews {
+			nextModule = NavigationModule(rawValue: nextModule.rawValue + 1)!
+		}
+		return nextModule
+	}
+
+	func returnModule(nextModule: NavigationModule, parameters: Any? = nil) -> UIViewController {
+		let moduleView = getModuleByEnum(moduleName: nextModule)
+
+		switch nextModule {
+		case .computerGuessesNumberModule:
+			let view = (moduleView as! ComputerGuessesNumberView)
+			view.output?.setRoundNumber(roundNumber: roundNumber)
+			(view.output as! ComputerGuessesNumberPresenter).moduleOutput = self as IComputerGuessedNumber & IGoTomoduleComplete
+		case .userGuessesNumberModule:
+			let view = (moduleView as! UserGuessesNumberView)
+			view.output?.setRoundNumber(roundNumber: roundNumber)
+			(view.output as! UserGuessesNumberPresenter).moduleOutput = self as IUserGuessedNumber & IGoTomoduleComplete
+		case .setNumberToGuessModule:
+			let view = (moduleView as! SetNumberToGuessView)
+			view.output?.setRoundNumber(roundNumber: roundNumber)
+			(view.output as! SetNumberToGuessPresenter).moduleOutput = self as IGoTomoduleComplete
+		case .startNewGameModule:
+			let startView = (moduleView as! StartNewGameView)
+			startView.output?.setGameState(state: parameters as! GameState)
+			(startView.output as! StartNewGamePresenter).moduleOutput = self as IGoTomoduleComplete
+		}
+		return moduleView
+	}
+}
+
+extension GameRoundsPresenter: IGoTomoduleComplete {
+	func moduleComplete() {
 		if isGameInProgress()
 		{
 			if nextModule == .startNewGameModule {
@@ -93,38 +128,6 @@ class GameRoundsPresenter: IGoToNextScreen {
 				}
 			}
 		}
-	}
-
-	func getNextModuleEnum(currentModule: NavigationModule) -> NavigationModule {
-		var nextModule = currentModule
-		if currentModule.rawValue < Constants.numberOfRecyclingViews {
-			nextModule = NavigationModule(rawValue: nextModule.rawValue + 1)!
-		}
-		return nextModule
-	}
-
-	func returnModule(nextModule: NavigationModule, parameters: Any? = nil) -> UIViewController {
-		let moduleView = getModuleByEnum(moduleName: nextModule)
-
-		switch nextModule {
-		case .computerGuessesNumberModule:
-			let view = (moduleView as! ComputerGuessesNumberView)
-			view.output?.setRoundNumber(roundNumber: roundNumber)
-			view.output?.setModuleOutput(moduleOutput: self as IComputerGuessedNumber)
-		case .userGuessesNumberModule:
-			let view = (moduleView as! UserGuessesNumberView)
-			view.output?.setRoundNumber(roundNumber: roundNumber)
-			view.output?.setModuleOutput(moduleOutput: self as IUserGuessedNumber)
-		case .setNumberToGuessModule:
-			let view = (moduleView as! SetNumberToGuessView)
-			view.output?.setRoundNumber(roundNumber: roundNumber)
-			view.output?.setModuleOutput(moduleOutput: self as IGoToNextScreen)
-		case .startNewGameModule:
-			let startView = (moduleView as! StartNewGameView)
-			startView.output?.setGameState(state: parameters as! GameState)
-			startView.output?.setModuleOutput(moduleOutput: self as IGoToNextScreen)
-		}
-		return moduleView
 	}
 }
 

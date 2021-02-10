@@ -17,7 +17,6 @@ protocol ComputerGuessesNumberViewOutput {
 	func greaterButtonPressed()
 	func lessButtonPressed()
 	func equalButtonPressed()
-	func setModuleOutput(moduleOutput: IComputerGuessedNumber)
 	func setRoundNumber(roundNumber: Int)
 }
 
