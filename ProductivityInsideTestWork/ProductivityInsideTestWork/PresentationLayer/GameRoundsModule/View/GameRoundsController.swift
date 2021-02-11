@@ -51,12 +51,12 @@ final class GameRoundsController: UINavigationController {
 	}
 
 	func pushNextModule(view: UIViewController, animated: Bool) {
-		navigationBar.isHidden = true
+		view.navigationItem.setHidesBackButton(true, animated: true)
 		pushViewController(view, animated: animated)
 	}
 	
 	func setViewControllersAsFirst(firstController: UIViewController) {
-		navigationBar.isHidden = true
+		firstController.navigationItem.setHidesBackButton(true, animated: true)
 		setViewControllers([firstController], animated: true)
 	}
 }

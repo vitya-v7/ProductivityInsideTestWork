@@ -2,7 +2,7 @@
 //  UserGuessingServiceTests.swift
 //  ProductivityInsideTestWorkTests
 //
-//  Created by Andrey Belkin on 07.02.2021.
+//  Created by Admin on 07.02.2021.
 //
 
 @testable import ProductivityInsideTestWork

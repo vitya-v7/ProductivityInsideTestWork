@@ -70,19 +70,16 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 
 	private func getComputerNumber(min:Int, max:Int, numberTip:NumberTips) -> Int {
 		var difference = maxGuessingNumber - minGuessingNumber
-		let differenceIsEven = difference % 2 == 0
-		if differenceIsEven {
+		let differenceIsUneven = difference % 2 == 1
+		if differenceIsUneven {
 			return difference / 2 + minGuessingNumber
 		} else {
 			if numberTip == NumberTips.greater {
 				difference += 1
-				return difference / 2 + minGuessingNumber
 			} else if numberTip == NumberTips.less {
 				difference -= 1
-				return difference / 2 + minGuessingNumber
 			}
 		}
-
 		return difference / 2 + minGuessingNumber
 	}
 }
