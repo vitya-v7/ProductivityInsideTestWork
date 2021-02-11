@@ -25,11 +25,14 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	@IBOutlet weak var guessedNumberByGamer: UITextField!
 	@IBOutlet weak var numberTips: UILabel!
 	@IBOutlet weak var acceptNumber: UIButton!
-
+	@IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint!
+	
 	var output: UserGuessesNumberViewOutput?
 	var viewModel: UserGuessesNumberViewModel?
+	var keyboardHandler: KeyboardHandler?
 
 	func setInitialState() {
+		keyboardHandler = KeyboardHandler(mainScrollViewBottomConstraint: mainScrollViewBottomConstraint)
 		self.youGuesses.text = "You Guesses"
 		self.guessedNumberByGamer.placeholder = "Guess the number"
 		self.acceptNumber.setTitle("Enter the number", for: .normal)

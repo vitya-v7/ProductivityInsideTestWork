@@ -10,7 +10,7 @@ import Foundation
 enum Constants {
 	static let maxNumber = 100
 	static let minNumber = 0
-	static let totalRoundNumber = 2
+	static let totalRoundNumber = 5
 	static let numberOfRecyclingViews = 3
 	static let startRound = 1
 }

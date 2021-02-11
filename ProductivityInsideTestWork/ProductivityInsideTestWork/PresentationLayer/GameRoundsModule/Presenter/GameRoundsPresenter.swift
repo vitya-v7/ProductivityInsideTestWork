@@ -47,7 +47,6 @@ class GameRoundsPresenter {
 		return !roundEnded && nextModule.rawValue <= Constants.numberOfRecyclingViews
 	}
 
-
 	func getNextModuleEnum(currentModule: NavigationModule) -> NavigationModule {
 		var nextModule = currentModule
 		if currentModule.rawValue < Constants.numberOfRecyclingViews {

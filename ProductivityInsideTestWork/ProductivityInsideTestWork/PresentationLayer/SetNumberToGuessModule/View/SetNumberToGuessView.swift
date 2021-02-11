@@ -23,11 +23,14 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 	@IBOutlet weak var roundNumber: UILabel!
 	@IBOutlet weak var enterNumber: UITextField!
 	@IBOutlet weak var acceptNumber: UIButton!
-
+	@IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint!
+	
 	var output: SetNumberToGuessViewOutput?
 	var viewModel:SetNumberToGuessViewModel?
-
+	var keyboardHandler: KeyboardHandler?
+	
 	func setInitialState() {
+		keyboardHandler = KeyboardHandler(mainScrollViewBottomConstraint: mainScrollViewBottomConstraint)
 		updateInitialUI()
 	}
 
@@ -41,8 +44,11 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 		self.enterNumber.placeholder = "Введите число"
 	}
 
+
 	override func viewDidLoad() {
+
 		super.viewDidLoad()
+
 		navigationController?.navigationItem.setHidesBackButton(true, animated: false)
 		acceptNumber.addTarget(self, action: #selector(numberWasAccepted(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
@@ -54,6 +60,6 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 			return
 		}
 		output?.numberWasEntered(number: number!)
-		
 	}
+
 }

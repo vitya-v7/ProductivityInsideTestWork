@@ -12,7 +12,6 @@ class ModulesFactory {
 	
 	class func createGameRoundsModuleAndStart() -> GameRoundsController {
 		let navVc = GameRoundsController()
-		navVc.keyboardPreferences()
 		let presenter = GameRoundsPresenter()
 		presenter.nextModule = .startNewGameModule
 		presenter.gameController = navVc
