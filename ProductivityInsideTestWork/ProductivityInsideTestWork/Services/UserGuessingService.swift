@@ -32,7 +32,7 @@ class UserGuessingService: UserGuessingServiceInterface {
 
 	func startGame() {
 		self.computerNumber = Int.random(in: minNumber ..< maxNumber + 1)
-		attempts = 0;
+		attempts = 0
 	}
 
 	func numberWasEntered(number: Int) -> NumberTips {

@@ -16,6 +16,7 @@ class ModulesFactory {
 		presenter.nextModule = .startNewGameModule
 		presenter.gameController = navVc
 		presenter.moduleComplete()
+		navVc.output = presenter
 		return navVc
 	}
 	
@@ -62,11 +63,11 @@ class ModulesFactory {
 	}
 
 	class func createComputerGuessingService(minNumber: Int, maxNumber: Int) -> ComputerGuessingService {
-		return ComputerGuessingService(minNumber: minNumber, maxNumber: maxNumber);
+		return ComputerGuessingService(minNumber: minNumber, maxNumber: maxNumber)
 	}
 
 	class func createUserGuessingService(minNumber: Int, maxNumber: Int) -> UserGuessingService {
-		return UserGuessingService(minNumber: minNumber, maxNumber: maxNumber);
+		return UserGuessingService(minNumber: minNumber, maxNumber: maxNumber)
 	}
 }
 

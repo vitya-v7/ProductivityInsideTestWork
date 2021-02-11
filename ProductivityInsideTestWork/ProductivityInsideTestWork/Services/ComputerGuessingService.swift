@@ -13,10 +13,10 @@ import Foundation
 protocol ComputerGuessingServiceInterface {
 	var attempts:Int! {get}
 
-	func startGame() -> Int
-	func greater() -> Int
-	func less() -> Int
-	func equal()
+	func startGame(guessedNumber: Int) -> Int
+	func greater() -> Int?
+	func less() -> Int?
+	func equal() -> Int?
 }
 
 class ComputerGuessingService: ComputerGuessingServiceInterface {
@@ -27,13 +27,16 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 	var maxGuessingNumber:Int!
 	var attempts:Int!
 	var computerNumber:Int!
+	var validNumber: Int!
+	var userNumber: Int!
 
 	init(minNumber:Int, maxNumber:Int) {
 		self.minNumber = minNumber
 		self.maxNumber = maxNumber
 	}
 
-	func startGame() -> Int {
+	func startGame(guessedNumber: Int) -> Int {
+		validNumber = guessedNumber
 		minGuessingNumber = minNumber
 		maxGuessingNumber = maxNumber
 		attempts = 0
@@ -42,28 +45,38 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 		return computerNumber
 	}
 
-	func greater() -> Int {
+	func greater() -> Int? {
+		if validNumber <= computerNumber {
+			return nil
+		}
 		if minGuessingNumber < computerNumber {
 			minGuessingNumber = computerNumber + 1
 		}
 		computerNumber = getComputerNumber(min:minGuessingNumber, max:maxGuessingNumber, numberTip:.greater)
 		attempts = attempts + 1
 
-		return computerNumber;
+		return computerNumber
 	}
 
-	func less() -> Int {
+	func less() -> Int? {
+		if validNumber >= computerNumber {
+			return nil
+		}
 		if maxGuessingNumber > computerNumber {
 			maxGuessingNumber = computerNumber - 1
 		}
 		computerNumber = getComputerNumber(min:minGuessingNumber, max:maxGuessingNumber, numberTip:.less)
 		attempts = attempts + 1
 
-		return computerNumber;
+		return computerNumber
 	}
 
-	func equal() {
+	func equal() -> Int? {
+		if validNumber != computerNumber {
+			return nil
+		}
 		attempts = attempts + 1
+		return computerNumber
 	}
 
 	// MARK: Private

@@ -151,6 +151,7 @@
 				84B338E325B0C8600088CCC0 /* Assembly */,
 				84B338CA25B022180088CCC0 /* AppDelegate.swift */,
 				84B338CC25B022180088CCC0 /* SceneDelegate.swift */,
+				84B5950825D5347200FC3456 /* KeyboardHandler.swift */,
 				84B338CE25B022180088CCC0 /* ViewController.swift */,
 				84B338D025B022180088CCC0 /* Main.storyboard */,
 				84B338D325B022190088CCC0 /* Assets.xcassets */,
@@ -294,7 +295,6 @@
 		D9AF6B4425D02CB800A016DF /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				84B5950825D5347200FC3456 /* KeyboardHandler.swift */,
 				84B23A8525D1391F0028F4DB /* GameRoundsModule */,
 				D9AF6B4525D02CCA00A016DF /* Common */,
 				84B338DF25B0C79B0088CCC0 /* StartNewGameModule */,

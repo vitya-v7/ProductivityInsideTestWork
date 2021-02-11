@@ -9,7 +9,13 @@ import Foundation
 import UIKit
 
 protocol IGoTomoduleComplete {
-	func moduleComplete()
+	func moduleComplete(parameters: Any?)
+}
+
+extension IGoTomoduleComplete {
+	func moduleComplete() {
+		moduleComplete(parameters: nil)
+	}
 }
 
 protocol IComputerGuessedNumber {
@@ -20,13 +26,13 @@ protocol IUserGuessedNumber {
 	func userEndedHisTurn(attempts: Int)
 }
 
-class GameRoundsPresenter {
+class GameRoundsPresenter: GameRoundControllerOutput {
+	weak var gameController: GameRoundControllerInput?
 	var roundNumber = Constants.startRound
 	var computerWins = 0
 	var userWins = 0
 	var userAttemptsInCurrentRound = 0
 	var computerAttemptsInCurrentRound = 0
-	weak var gameController: GameRoundsController?
 	var nextModule: NavigationModule = .startNewGameModule
 	var roundEnded = false
 
@@ -62,6 +68,7 @@ class GameRoundsPresenter {
 		case .computerGuessesNumberModule:
 			let view = (moduleView as! ComputerGuessesNumberView)
 			view.output?.setRoundNumber(roundNumber: roundNumber)
+			(view.output! as! ComputerGuessesNumberPresenter).guessedNumber = parameters as! Int
 			(view.output as! ComputerGuessesNumberPresenter).moduleOutput = self as IComputerGuessedNumber & IGoTomoduleComplete
 		case .userGuessesNumberModule:
 			let view = (moduleView as! UserGuessesNumberView)
@@ -81,12 +88,16 @@ class GameRoundsPresenter {
 }
 
 extension GameRoundsPresenter: IGoTomoduleComplete {
-	func moduleComplete() {
+	func moduleComplete(parameters: Any? = nil) {
 		if isGameInProgress()
 		{
 			if nextModule == .startNewGameModule {
 				let moduleView = returnModule(nextModule: nextModule, parameters: GameState.newGame)
 				gameController?.setViewControllersAsFirst(firstController: moduleView)
+			}
+			else if nextModule == .computerGuessesNumberModule {
+				let moduleView = returnModule(nextModule: nextModule, parameters: parameters)
+				gameController?.pushNextModule(view: moduleView, animated: true)
 			}
 			else {
 				let moduleView = returnModule(nextModule: nextModule)

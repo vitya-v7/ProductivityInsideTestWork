@@ -10,6 +10,8 @@ import UIKit
 protocol ComputerGuessesNumberViewInput : UIViewController  {
 	func setInitialState()
 	func setViewModel(viewModel: ComputerGuessesNumberViewModel)
+	func setAlert()
+	func unsetAlert()
 }
 
 protocol ComputerGuessesNumberViewOutput {
@@ -50,6 +52,16 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 		output?.viewDidLoadDone()
 	}
 
+	func setAlert() {
+		let text = NSAttributedString.init(string: "Press the right button!", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+		self.computerGuesses.attributedText = text
+	}
+
+	func unsetAlert() {
+		let text = NSAttributedString.init(string: "Computer Guesses", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+		self.computerGuesses.attributedText = text
+	}
+
 	@objc func guessedNumberIsGreater(_: UIButton) {
 		output?.greaterButtonPressed()
 	}
@@ -57,6 +69,7 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 	@objc func guessedNumberIsLess(_: UIButton) {
 		output?.lessButtonPressed()
 	}
+
 	@objc func guessedNumberIsEqual(_: UIButton) {
 		output?.equalButtonPressed()
 	}

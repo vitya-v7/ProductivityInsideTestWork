@@ -8,8 +8,19 @@
 import Foundation
 import UIKit
 
-final class GameRoundsController: UINavigationController {
+protocol GameRoundControllerInput : UIViewController  {
+	func pushNextModule(view: UIViewController, animated: Bool)
+	func setViewControllersAsFirst(firstController: UIViewController)
+}
 
+protocol GameRoundControllerOutput {
+
+}
+
+final class GameRoundsController: UINavigationController, GameRoundControllerInput {
+
+	var output: GameRoundControllerOutput?
+	
 	func pushNextModule(view: UIViewController, animated: Bool) {
 		navigationBar.isHidden = true
 		pushViewController(view, animated: animated)

@@ -19,7 +19,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
-		let computerNumber = computerGuessingService.startGame()
+		let computerNumber = computerGuessingService.startGame(guessedNumber: guessedNumber)
 		viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber, guessedNumberByComputer: computerNumber)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
@@ -32,18 +32,39 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func greaterButtonPressed() {
 		let computerNumber = computerGuessingService.greater()
+		if computerNumber == nil {
+			view?.setAlert()
+			return
+		}
+		else {
+			view?.unsetAlert()
+		}
 		viewModel?.guessedNumberByComputer = computerNumber
 		view?.setViewModel(viewModel: viewModel!)
 	}
 
 	func lessButtonPressed() {
 		let computerNumber = computerGuessingService.less()
+		if computerNumber == nil {
+			view?.setAlert()
+			return
+		}
+		else {
+			view?.unsetAlert()
+		}
 		viewModel?.guessedNumberByComputer = computerNumber
 		view?.setViewModel(viewModel: viewModel!)
 	}
 
 	func equalButtonPressed() {
-		computerGuessingService.equal()
+		let computerNumber = computerGuessingService.equal()
+		if computerNumber == nil {
+			view?.setAlert()
+			return
+		}
+		else {
+			view?.unsetAlert()
+		}
 		moduleOutput?.computerEndedItsTurn(attempts: computerGuessingService.attempts)
 		moduleOutput?.moduleComplete()
 	}

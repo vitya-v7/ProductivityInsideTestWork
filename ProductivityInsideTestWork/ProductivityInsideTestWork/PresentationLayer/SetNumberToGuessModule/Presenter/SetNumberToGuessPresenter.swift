@@ -26,7 +26,7 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
-		moduleOutput?.moduleComplete()
+		moduleOutput?.moduleComplete(parameters: number)
 	}
 }
 

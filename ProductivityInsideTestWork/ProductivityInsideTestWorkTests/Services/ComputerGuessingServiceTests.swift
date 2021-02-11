@@ -16,7 +16,7 @@ class ComputerGuessingServiceTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        computerGuessingService = nil;
+        computerGuessingService = nil
     }
 
     func testStartGame() throws {
