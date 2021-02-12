@@ -8,15 +8,6 @@
 import Foundation
 import UIKit
 
-protocol IGoTomoduleComplete {
-	func moduleComplete(parameters: Any?)
-}
-
-extension IGoTomoduleComplete {
-	func moduleComplete() {
-		moduleComplete(parameters: nil)
-	}
-}
 
 protocol IComputerGuessedNumber {
 	func computerEndedItsTurn(attempts: Int)
@@ -26,6 +17,23 @@ protocol IUserGuessedNumber {
 	func userEndedHisTurn(attempts: Int)
 }
 
+protocol IStartNewModuleComplete {
+	func startNewGameModuleComplete()
+}
+
+protocol ISetNumberToGuessModuleComplete {
+	func setNumberToGuessModuleComplete(guessedNumberByUser: Int)
+}
+
+protocol IComputerGuessesNumberComplete {
+	func computerGuessesNumberModuleComplete()
+}
+
+protocol IUserGuessesNumberComplete {
+	func userGuessesNumberModuleComplete()
+}
+
+
 class GameRoundsPresenter: GameRoundControllerOutput {
 	weak var gameController: GameRoundControllerInput?
 	var roundNumber = Constants.startRound
@@ -33,7 +41,7 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 	var userWins = 0
 	var userAttemptsInCurrentRound = 0
 	var computerAttemptsInCurrentRound = 0
-	var nextModule: NavigationModule = .startNewGameModule
+	var currentModule: NavigationModule = .startNewGameModule
 	var roundEnded = false
 
 	func getModuleByEnum(moduleName: NavigationModule) -> UIViewController {
@@ -49,94 +57,110 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 		}
 	}
 
-	func isGameInProgress() -> Bool {
-		return !roundEnded && nextModule.rawValue <= Constants.numberOfRecyclingViews
-	}
-
 	func getNextModuleEnum(currentModule: NavigationModule) -> NavigationModule {
 		var nextModule = currentModule
-		if currentModule.rawValue < Constants.numberOfRecyclingViews {
-			nextModule = NavigationModule(rawValue: nextModule.rawValue + 1)!
+		var index = nextModule.rawValue % Constants.numberOfRecyclingViews + 1
+		if roundNumber == Constants.totalRoundNumber + 1 {
+			index = 0
 		}
+		nextModule = NavigationModule(rawValue: index)!
 		return nextModule
 	}
 
-	func returnModule(nextModule: NavigationModule, parameters: Any? = nil) -> UIViewController {
-		let moduleView = getModuleByEnum(moduleName: nextModule)
-
-		switch nextModule {
+	func setParametersForModule(moduleView: UIViewController, parameters: Any? = nil) {
+		switch currentModule {
 		case .computerGuessesNumberModule:
 			let view = (moduleView as! ComputerGuessesNumberView)
 			view.output?.setRoundNumber(roundNumber: roundNumber)
 			(view.output! as! ComputerGuessesNumberPresenter).guessedNumber = parameters as! Int
-			(view.output as! ComputerGuessesNumberPresenter).moduleOutput = self as IComputerGuessedNumber & IGoTomoduleComplete
+			(view.output as! ComputerGuessesNumberPresenter).moduleOutput = self as IComputerGuessedNumber & IComputerGuessesNumberComplete
 		case .userGuessesNumberModule:
 			let view = (moduleView as! UserGuessesNumberView)
 			view.output?.setRoundNumber(roundNumber: roundNumber)
-			(view.output as! UserGuessesNumberPresenter).moduleOutput = self as IUserGuessedNumber & IGoTomoduleComplete
+			(view.output as! UserGuessesNumberPresenter).moduleOutput = self as IUserGuessedNumber & IUserGuessesNumberComplete
 		case .setNumberToGuessModule:
 			let view = (moduleView as! SetNumberToGuessView)
 			view.output?.setRoundNumber(roundNumber: roundNumber)
-			(view.output as! SetNumberToGuessPresenter).moduleOutput = self as IGoTomoduleComplete
+
+			(view.output as! SetNumberToGuessPresenter).moduleOutput = self as ISetNumberToGuessModuleComplete
 		case .startNewGameModule:
 			let startView = (moduleView as! StartNewGameView)
-			startView.output?.setGameState(state: parameters as! GameState)
-			(startView.output as! StartNewGamePresenter).moduleOutput = self as IGoTomoduleComplete
+			if roundNumber == Constants.totalRoundNumber {
+				if computerWins > userWins {
+					startView.output?.setGameState(state: GameState.lose)
+				}
+				else {
+					startView.output?.setGameState(state: GameState.win)
+
+				}
+			}
+			else {
+				startView.output?.setGameState(state: GameState.newGame)
+			}
+			(startView.output as! StartNewGamePresenter).moduleOutput = self as IStartNewModuleComplete
 		}
+	}
+
+	func returnNextModule(parameters: Any? = nil) -> UIViewController {
+		currentModule = getNextModuleEnum(currentModule: currentModule)
+		return returnCurrentModule(parameters: parameters)
+	}
+
+	func returnCurrentModule(parameters: Any? = nil) -> UIViewController {
+		let moduleView = getModuleByEnum(moduleName: currentModule)
+		setParametersForModule(moduleView: moduleView, parameters: parameters)
 		return moduleView
 	}
 }
 
-extension GameRoundsPresenter: IGoTomoduleComplete {
-	func moduleComplete(parameters: Any? = nil) {
-		if isGameInProgress()
-		{
-			if nextModule == .startNewGameModule {
-				let moduleView = returnModule(nextModule: nextModule, parameters: GameState.newGame)
-				gameController?.setViewControllersAsFirst(firstController: moduleView)
-			}
-			else if nextModule == .computerGuessesNumberModule {
-				let moduleView = returnModule(nextModule: nextModule, parameters: parameters)
-				gameController?.pushNextModule(view: moduleView, animated: true)
+extension GameRoundsPresenter: IStartNewModuleComplete {
+	func startNewGameModuleComplete() {
+		let moduleView = returnNextModule()
+		if roundNumber == Constants.startRound {
+			gameController?.dismissLastModule(animated: true)
+		}
+		gameController?.setViewControllersAsFirst(firstController: moduleView)
+	}
+}
+
+extension GameRoundsPresenter: ISetNumberToGuessModuleComplete {
+	func setNumberToGuessModuleComplete(guessedNumberByUser: Int) {
+		
+		let moduleView = returnNextModule(parameters: guessedNumberByUser)
+		gameController?.pushNextModule(view: moduleView, animated: true)
+	}
+}
+
+extension GameRoundsPresenter: IComputerGuessesNumberComplete {
+	func computerGuessesNumberModuleComplete() {
+		let moduleView = returnNextModule()
+		gameController?.pushNextModule(view: moduleView, animated: true)
+	}
+}
+
+extension GameRoundsPresenter: IUserGuessesNumberComplete {
+	func userGuessesNumberModuleComplete() {
+		roundNumber = roundNumber + 1
+		if roundNumber <= Constants.totalRoundNumber {
+			if computerAttemptsInCurrentRound < userAttemptsInCurrentRound {
+				computerWins = computerWins + 1
 			}
 			else {
-				let moduleView = returnModule(nextModule: nextModule)
-				gameController?.pushNextModule(view: moduleView, animated: true)
+				userWins = userWins + 1
 			}
-			if nextModule.rawValue == Constants.numberOfRecyclingViews {
-				roundEnded = true
-				roundNumber = roundNumber + 1
-			}
-			nextModule = getNextModuleEnum(currentModule: nextModule)
+			let moduleView = returnNextModule()
+			gameController?.setViewControllersAsFirst(firstController: moduleView)
 		}
 		else {
-			roundEnded = false
-			if roundNumber <= Constants.totalRoundNumber {
-				if computerAttemptsInCurrentRound < userAttemptsInCurrentRound {
-					computerWins = computerWins + 1
-				}
-				else {
-					userWins = userWins + 1
-				}
-				nextModule = NavigationModule.setNumberToGuessModule
-				let moduleView = returnModule(nextModule: nextModule)
-				gameController?.setViewControllersAsFirst(firstController: moduleView)
-				nextModule = getNextModuleEnum(currentModule: nextModule)
+			let moduleView: UIViewController
+			if computerWins > userWins {
+				moduleView = returnNextModule(parameters: GameState.lose)
 			}
 			else {
-				roundNumber = Constants.startRound
-				nextModule = NavigationModule.startNewGameModule
-				if computerWins > userWins {
-					let moduleView = returnModule(nextModule: nextModule, parameters: GameState.lose)
-					gameController?.setViewControllersAsFirst(firstController: moduleView)
-					nextModule = getNextModuleEnum(currentModule: nextModule)
-				}
-				else {
-					let moduleView = returnModule(nextModule: nextModule, parameters: GameState.win)
-					gameController?.setViewControllersAsFirst(firstController: moduleView)
-					nextModule = getNextModuleEnum(currentModule: nextModule)
-				}
+				moduleView = returnNextModule(parameters: GameState.win)
 			}
+			roundNumber = Constants.startRound
+			gameController?.presentResultModule(view: moduleView, animated: true)
 		}
 	}
 }

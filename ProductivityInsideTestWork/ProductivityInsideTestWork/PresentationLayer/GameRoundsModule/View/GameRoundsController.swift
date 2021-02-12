@@ -11,6 +11,8 @@ import UIKit
 protocol GameRoundControllerInput : UIViewController  {
 	func pushNextModule(view: UIViewController, animated: Bool)
 	func setViewControllersAsFirst(firstController: UIViewController)
+	func presentResultModule(view: UIViewController, animated: Bool)
+	func dismissLastModule(animated: Bool)
 }
 
 protocol GameRoundControllerOutput {
@@ -29,5 +31,17 @@ final class GameRoundsController: UINavigationController, GameRoundControllerInp
 	func setViewControllersAsFirst(firstController: UIViewController) {
 		navigationBar.isHidden = true
 		setViewControllers([firstController], animated: true)
+	}
+
+	func presentResultModule(view: UIViewController, animated: Bool) {
+		let modalStyle: UIModalTransitionStyle = UIModalTransitionStyle.coverVertical
+		let presentationStyle: UIModalPresentationStyle = .fullScreen
+		view.modalTransitionStyle = modalStyle
+		view.modalPresentationStyle = presentationStyle
+		present(view, animated: true, completion: nil)
+	}
+
+	func dismissLastModule(animated: Bool) {
+		dismiss(animated: animated, completion: nil)
 	}
 }

@@ -15,11 +15,14 @@ class StartNewGameViewModel {
 	
 	init(gameState: GameState = .newGame) {
 		self.gameState = gameState
-		if self.gameState != .newGame {
+		if self.gameState == .win {
 			self.title = "Congratulations"
 		}
-		else {
+		else if self.gameState == .newGame {
 			self.title = "Guess The Number: The Game"
+		}
+		else {
+			self.title = ""
 		}
 	}
 }

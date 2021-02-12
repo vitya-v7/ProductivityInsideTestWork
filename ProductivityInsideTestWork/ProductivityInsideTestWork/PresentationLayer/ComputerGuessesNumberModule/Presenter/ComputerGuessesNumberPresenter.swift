@@ -15,7 +15,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	var computerGuessingService: ComputerGuessingServiceInterface!
 	var roundNumber: Int = 0
 	var guessedNumber: Int = 0
-	var moduleOutput: (IComputerGuessedNumber & IGoTomoduleComplete)?
+	var moduleOutput: (IComputerGuessedNumber & IComputerGuessesNumberComplete)?
 
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
@@ -66,6 +66,6 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 			view?.unsetAlert()
 		}
 		moduleOutput?.computerEndedItsTurn(attempts: computerGuessingService.attempts)
-		moduleOutput?.moduleComplete()
+		moduleOutput?.computerGuessesNumberModuleComplete()
 	}
 }

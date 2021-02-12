@@ -13,9 +13,9 @@ class ModulesFactory {
 	class func createGameRoundsModuleAndStart() -> GameRoundsController {
 		let navVc = GameRoundsController()
 		let presenter = GameRoundsPresenter()
-		presenter.nextModule = .startNewGameModule
+		presenter.currentModule = .startNewGameModule
 		presenter.gameController = navVc
-		presenter.moduleComplete()
+		navVc.setViewControllersAsFirst(firstController: presenter.returnCurrentModule(parameters: GameState.newGame))
 		navVc.output = presenter
 		return navVc
 	}

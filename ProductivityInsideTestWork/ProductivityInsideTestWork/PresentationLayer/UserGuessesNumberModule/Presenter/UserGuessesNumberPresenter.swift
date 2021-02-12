@@ -14,7 +14,7 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	var viewModel: UserGuessesNumberViewModel!
 	var userGuessingService: UserGuessingServiceInterface!
 	var roundNumber: Int = 0
-	var moduleOutput: (IUserGuessedNumber & IGoTomoduleComplete)?
+	var moduleOutput: (IUserGuessedNumber & IUserGuessesNumberComplete)?
 
 	func viewDidLoadDone() {
 		userGuessingService.startGame()
@@ -31,8 +31,7 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 		let result = userGuessingService.numberWasEntered(number: number)
 		if result == .equal {
 			moduleOutput?.userEndedHisTurn(attempts: userGuessingService.attempts)
-			moduleOutput?.moduleComplete()
-		} else {
+			moduleOutput?.userGuessesNumberModuleComplete()		} else {
 			viewModel = UserGuessesNumberViewModel(roundNumber: viewModel.roundNumber, numberTip: result)
 			view?.setViewModel(viewModel: viewModel!)
 		}

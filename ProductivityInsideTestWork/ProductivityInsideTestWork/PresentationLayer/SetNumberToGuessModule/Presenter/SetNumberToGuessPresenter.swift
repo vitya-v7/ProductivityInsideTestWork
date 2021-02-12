@@ -12,7 +12,7 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	
 	weak var view: SetNumberToGuessViewInput?
 	var viewModel: SetNumberToGuessViewModel!
-	var moduleOutput: IGoTomoduleComplete?
+	var moduleOutput: ISetNumberToGuessModuleComplete?
 	var roundNumber = 0
 	func viewDidLoadDone() {
 		viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber)
@@ -26,7 +26,7 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
-		moduleOutput?.moduleComplete(parameters: number)
+		moduleOutput?.setNumberToGuessModuleComplete(guessedNumberByUser: number)
 	}
 }
 
