@@ -27,7 +27,6 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 
 	func setGameState(state: GameState) {
 		moduleState = state
-
 	}
 }
 

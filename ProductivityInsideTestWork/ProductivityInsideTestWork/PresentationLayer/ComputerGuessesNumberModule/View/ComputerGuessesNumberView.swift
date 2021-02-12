@@ -10,7 +10,7 @@ import UIKit
 protocol ComputerGuessesNumberViewInput : UIViewController  {
 	func setInitialState()
 	func setViewModel(viewModel: ComputerGuessesNumberViewModel)
-	func setAlert()
+	func setAlert(string: String)
 	func unsetAlert()
 }
 
@@ -52,8 +52,8 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 		output?.viewDidLoadDone()
 	}
 
-	func setAlert() {
-		let text = NSAttributedString.init(string: "Press the right button!", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+	func setAlert(string: String) {
+		let text = NSAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 		self.computerGuesses.attributedText = text
 	}
 

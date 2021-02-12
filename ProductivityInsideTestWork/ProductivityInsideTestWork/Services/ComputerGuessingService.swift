@@ -14,9 +14,9 @@ protocol ComputerGuessingServiceInterface {
 	var attempts:Int! {get}
 
 	func startGame(guessedNumber: Int) -> Int
-	func greater() -> Int?
-	func less() -> Int?
-	func equal() -> Int?
+	func greater() throws -> Int
+	func less() throws -> Int
+	func equal() throws
 }
 
 class ComputerGuessingService: ComputerGuessingServiceInterface {
@@ -29,6 +29,10 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 	var computerNumber:Int!
 	var validNumber: Int!
 	var userNumber: Int!
+
+	enum WrongButton: Error {
+		case unfairGame(String)
+	}
 
 	init(minNumber:Int, maxNumber:Int) {
 		self.minNumber = minNumber
@@ -45,9 +49,9 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 		return computerNumber
 	}
 
-	func greater() -> Int? {
+	func greater() throws -> Int {
 		if validNumber <= computerNumber {
-			return nil
+			throw WrongButton.unfairGame(Constants.unfairGame)
 		}
 		if minGuessingNumber < computerNumber {
 			minGuessingNumber = computerNumber + 1
@@ -58,9 +62,9 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 		return computerNumber
 	}
 
-	func less() -> Int? {
+	func less() throws -> Int {
 		if validNumber >= computerNumber {
-			return nil
+			throw WrongButton.unfairGame(Constants.unfairGame)
 		}
 		if maxGuessingNumber > computerNumber {
 			maxGuessingNumber = computerNumber - 1
@@ -71,28 +75,30 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 		return computerNumber
 	}
 
-	func equal() -> Int? {
+	func equal() throws {
 		if validNumber != computerNumber {
-			return nil
+			throw WrongButton.unfairGame(Constants.unfairGame)
 		}
 		attempts = attempts + 1
-		return computerNumber
 	}
 
 	// MARK: Private
 
 	private func getComputerNumber(min:Int, max:Int, numberTip:NumberTips) -> Int {
 		var difference = maxGuessingNumber - minGuessingNumber
-		let differenceIsUneven = difference % 2 == 1
-		if differenceIsUneven {
+		let differenceIsEven = difference % 2 == 0
+		if differenceIsEven {
 			return difference / 2 + minGuessingNumber
 		} else {
 			if numberTip == NumberTips.greater {
 				difference += 1
+				return difference / 2 + minGuessingNumber
 			} else if numberTip == NumberTips.less {
 				difference -= 1
+				return difference / 2 + minGuessingNumber
 			}
 		}
+
 		return difference / 2 + minGuessingNumber
 	}
 }

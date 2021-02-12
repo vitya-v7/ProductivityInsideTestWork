@@ -19,7 +19,7 @@ class ComputerGuessingServiceTests: XCTestCase {
         computerGuessingService = nil
     }
 
-    func testStartGame() throws {
+    /*func testStartGame() throws {
         // given
         let minNumber = 0
         let maxNumber = 40
@@ -36,15 +36,7 @@ class ComputerGuessingServiceTests: XCTestCase {
         XCTAssertLessThanOrEqual(computerNumber, maxNumber)
     }
 
-    func testCheckAttemts() throws {
-        // given
-        _ = computerGuessingService.startGame()
-        XCTAssertEqual(computerGuessingService.attempts, 0)
-        _ = computerGuessingService.greater()
-        XCTAssertEqual(computerGuessingService.attempts, 1)
-        _ = computerGuessingService.less()
-        XCTAssertEqual(computerGuessingService.attempts, 2)
-    }
+
 
     func testCorrectGuessingOfEvenNumberWhichGreaterThan20() throws {
         // given
@@ -107,5 +99,52 @@ class ComputerGuessingServiceTests: XCTestCase {
         XCTAssertEqual(computerGuessingService.greater(), 18)
         XCTAssertEqual(computerGuessingService.less(), 16)
         XCTAssertEqual(computerGuessingService.greater(), 17)
-    }
+    }*/
+
+	func testCorrectGuessingOfEvenNumberWhichLessThan20() throws {
+		// given
+		// numberToGuess = 17
+		let computerNumberStep1 = computerGuessingService.startGame(guessedNumber: 17)
+		XCTAssertEqual(computerNumberStep1, 20)
+		XCTAssertEqual(try? computerGuessingService.less(), 9)
+		XCTAssertEqual(try? computerGuessingService.greater(), 15)
+		XCTAssertEqual(try? computerGuessingService.greater(), 18)
+		XCTAssertEqual(try? computerGuessingService.less(), 16)
+		XCTAssertEqual(try? computerGuessingService.greater(), 17)
+	}
+	
+	func testCheckAttempts() throws {
+		// given
+		_ = computerGuessingService.startGame(guessedNumber: 3)
+		XCTAssertEqual(computerGuessingService.attempts, 0)
+		_ = try? computerGuessingService.less()
+		XCTAssertEqual(computerGuessingService.attempts, 1)
+		_ = try? computerGuessingService.less()
+		XCTAssertEqual(computerGuessingService.attempts, 2)
+	}
+
+	func testAllGuessingCases() throws {
+			// given
+			let minNumber = 0
+			let maxNumber = 100
+			let triesNumber = 20
+
+			for guessNumber in minNumber..<maxNumber {
+				var computerNumber = computerGuessingService.startGame(guessedNumber: guessNumber)
+				for computerGuessingTryNumber in 0..<triesNumber {
+					if computerGuessingTryNumber == triesNumber - 1 {
+						XCTFail("computer wasn't able to guess number =" + String(guessNumber));
+					} else {
+						if computerNumber > guessNumber {
+							computerNumber = try! computerGuessingService.less()
+						} else if computerNumber < guessNumber {
+							computerNumber = try! computerGuessingService.greater()
+						} else {
+							print(String(guessNumber) + "guessed")
+							break;
+						}
+					}
+				}
+			}
+		}
 }

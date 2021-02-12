@@ -81,7 +81,6 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 				}
 				else {
 					startView.output?.setGameState(state: GameState.win)
-
 				}
 			}
 			else {
@@ -106,10 +105,11 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 extension GameRoundsPresenter: IStartNewModuleComplete {
 	func startNewGameModuleComplete() {
 		let moduleView = returnNextModule()
+		gameController?.setViewControllersAsFirst(firstController: moduleView)
 		if roundNumber == Constants.startRound {
 			gameController?.dismissLastModule(animated: true)
 		}
-		gameController?.setViewControllersAsFirst(firstController: moduleView)
+
 	}
 }
 

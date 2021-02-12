@@ -13,6 +13,7 @@ enum Constants {
 	static let totalRoundNumber = 2
 	static let numberOfRecyclingViews = 3
 	static let startRound = 1
+	static let unfairGame = "Press the right button!"
 }
 
 public enum NavigationModule: Int {

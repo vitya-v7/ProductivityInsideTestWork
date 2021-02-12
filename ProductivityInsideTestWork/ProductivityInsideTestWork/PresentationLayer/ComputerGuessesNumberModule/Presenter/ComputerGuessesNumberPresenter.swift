@@ -31,40 +31,49 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func greaterButtonPressed() {
-		let computerNumber = computerGuessingService.greater()
-		if computerNumber == nil {
-			view?.setAlert()
+		do {
+			let computerNumber = try computerGuessingService.greater()
+			view?.unsetAlert()
+			viewModel?.guessedNumberByComputer = computerNumber
+			view?.setViewModel(viewModel: viewModel!)
+		}
+		catch ComputerGuessingService.WrongButton.unfairGame(let message) {
+			view?.setAlert(string: message)
 			return
 		}
-		else {
-			view?.unsetAlert()
+		catch  {
+			fatalError("lessButtonPressed() - unknown error")
 		}
-		viewModel?.guessedNumberByComputer = computerNumber
-		view?.setViewModel(viewModel: viewModel!)
 	}
 
 	func lessButtonPressed() {
-		let computerNumber = computerGuessingService.less()
-		if computerNumber == nil {
-			view?.setAlert()
+		do {
+			let computerNumber = try computerGuessingService.less()
+			view?.unsetAlert()
+			viewModel?.guessedNumberByComputer = computerNumber
+			view?.setViewModel(viewModel: viewModel!)
+		}
+		catch ComputerGuessingService.WrongButton.unfairGame(let message) {
+			view?.setAlert(string: message)
 			return
 		}
-		else {
-			view?.unsetAlert()
+		catch  {
+			fatalError("lessButtonPressed() - unknown error")
 		}
-		viewModel?.guessedNumberByComputer = computerNumber
-		view?.setViewModel(viewModel: viewModel!)
 	}
 
 	func equalButtonPressed() {
-		let computerNumber = computerGuessingService.equal()
-		if computerNumber == nil {
-			view?.setAlert()
+		do {
+			try computerGuessingService.equal()
+			view?.unsetAlert()
+			moduleOutput?.computerGuessesNumberModuleComplete(attempts: computerGuessingService.attempts)
+		}
+		catch ComputerGuessingService.WrongButton.unfairGame(let message) {
+			view?.setAlert(string: message)
 			return
 		}
-		else {
-			view?.unsetAlert()
+		catch  {
+			fatalError("lessButtonPressed() - unknown error")
 		}
-		moduleOutput?.computerGuessesNumberModuleComplete(attempts: computerGuessingService.attempts)
 	}
 }
