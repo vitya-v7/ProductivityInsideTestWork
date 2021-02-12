@@ -201,7 +201,7 @@
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="guessedNumberIsLess:" destination="lS1-tY-k4O" eventType="touchUpInside" id="pAt-Sw-fmV"/>
+                                    <action selector="guessedNumberIsEqual:" destination="lS1-tY-k4O" eventType="touchUpInside" id="Emx-km-F1l"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9e-Zc-SN4">
@@ -211,7 +211,7 @@
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="guessedNumberIsEqual:" destination="lS1-tY-k4O" eventType="touchUpInside" id="Mgc-su-EVW"/>
+                                    <action selector="guessedNumberIsLess:" destination="lS1-tY-k4O" eventType="touchUpInside" id="qSc-DV-3s4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMi-ZX-eRN">
@@ -221,7 +221,7 @@
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="guessedNumberIsGreater:" destination="lS1-tY-k4O" eventType="touchUpInside" id="ezq-yH-fk4"/>
+                                    <action selector="guessedNumberIsGreater:" destination="lS1-tY-k4O" eventType="touchUpInside" id="lCt-Va-bBs"/>
                                 </connections>
                             </button>
                         </subviews>
