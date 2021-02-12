@@ -14,6 +14,7 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	var viewModel: SetNumberToGuessViewModel!
 	var moduleOutput: ISetNumberToGuessModuleComplete?
 	var roundNumber = 0
+	
 	func viewDidLoadDone() {
 		viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber)
 		view?.setViewModel(viewModel: viewModel!)

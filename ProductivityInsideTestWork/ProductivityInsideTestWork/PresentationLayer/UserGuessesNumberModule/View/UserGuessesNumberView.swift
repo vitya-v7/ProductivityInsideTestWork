@@ -26,7 +26,13 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	@IBOutlet weak var numberTips: UILabel!
 	@IBOutlet weak var acceptNumber: UIButton!
 	@IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint!
-	
+
+	@IBAction func numberWasEntered(_ sender: UIButton) {
+		if let number = Int(guessedNumberByGamer.text!) {
+			output?.numberWasEntered(number: number)
+		}
+	}
+
 	var output: UserGuessesNumberViewOutput?
 	var viewModel: UserGuessesNumberViewModel?
 	var keyboardHandler: KeyboardHandler?
@@ -46,14 +52,7 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		acceptNumber.addTarget(self, action: #selector(numberWasEntered(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
-	}
-
-	@objc func numberWasEntered(_:UIButton) {
-		if let number = Int(guessedNumberByGamer.text!) {
-			output?.numberWasEntered(number: number)
-		}
 	}
 }
 

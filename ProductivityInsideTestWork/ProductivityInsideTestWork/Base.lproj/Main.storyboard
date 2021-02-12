@@ -38,6 +38,9 @@
                                         <state key="normal" title="Default">
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="startNewGame:" destination="4wz-Fi-xLY" eventType="touchUpInside" id="SHu-d5-Yt1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="nCB-yD-Msj"/>
@@ -109,6 +112,9 @@
                                                 <state key="normal" title="Button">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberWasAccepted:" destination="baW-wv-0fZ" eventType="touchUpInside" id="thw-M0-WE1"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="t4O-cC-PPS"/>
@@ -194,6 +200,9 @@
                                 <state key="normal" title="=">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="guessedNumberIsLess:" destination="lS1-tY-k4O" eventType="touchUpInside" id="pAt-Sw-fmV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9e-Zc-SN4">
                                 <rect key="frame" x="707" y="1296" width="307" height="30"/>
@@ -201,6 +210,9 @@
                                 <state key="normal" title="&lt;">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="guessedNumberIsEqual:" destination="lS1-tY-k4O" eventType="touchUpInside" id="Mgc-su-EVW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMi-ZX-eRN">
                                 <rect key="frame" x="10" y="1296" width="307" height="30"/>
@@ -208,6 +220,9 @@
                                 <state key="normal" title="&gt;">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="guessedNumberIsGreater:" destination="lS1-tY-k4O" eventType="touchUpInside" id="ezq-yH-fk4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jiU-5h-2NR"/>
@@ -282,6 +297,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberWasEntered:" destination="1Sr-mH-KhO" eventType="touchUpInside" id="ubx-6P-1Pq"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J51-4y-2Ff">
                                                 <rect key="frame" x="205" y="640.5" width="614" height="65"/>

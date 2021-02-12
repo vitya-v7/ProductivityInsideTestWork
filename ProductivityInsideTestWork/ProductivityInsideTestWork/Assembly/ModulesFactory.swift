@@ -15,50 +15,52 @@ class ModulesFactory {
 		let presenter = GameRoundsPresenter()
 		presenter.currentModule = .startNewGameModule
 		presenter.gameController = navVc
-		navVc.setViewControllersAsFirst(firstController: presenter.returnCurrentModule(parameters: GameState.newGame))
-		navVc.output = presenter
+		let vc = createStartNewGameModule()
+		presenter.setParametersForModule(moduleView: vc)
+		navVc.setViewControllersAsFirst(firstController: vc)
+
 		return navVc
 	}
 	
 	class func createStartNewGameModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
 		let view = storyboard.instantiateViewController(identifier: ModulesConstants.startNewGameViewIdentifier) as! StartNewGameView
-
 		let presenter = StartNewGamePresenter()
 		view.output = presenter
 		presenter.view = view
+
 		return view
 	}
 
 	class func createSetNumberToGuessModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
 		let view = storyboard.instantiateViewController(identifier: ModulesConstants.setNumberToGuessViewIdentifier) as! SetNumberToGuessView
-
 		let presenter = SetNumberToGuessPresenter()
 		view.output = presenter
 		presenter.view = view
+
 		return view
 	}
 
 	class func createComputerGuessesNumberModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
 		let view = storyboard.instantiateViewController(identifier: ModulesConstants.computerGuessesNumberViewIdentifier) as! ComputerGuessesNumberView
-
 		let presenter = ComputerGuessesNumberPresenter()
 		view.output = presenter
 		presenter.view = view
 		presenter.computerGuessingService = createComputerGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
+
 		return view
 	}
 
 	class func createUserGuessesNumberModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
 		let view = storyboard.instantiateViewController(identifier: ModulesConstants.userGuessesNumberViewIdentifier) as! UserGuessesNumberView
-
 		let presenter = UserGuessesNumberPresenter()
 		view.output = presenter
 		presenter.view = view
 		presenter.userGuessingService = createUserGuessingService(minNumber: Constants.minNumber, maxNumber: Constants.maxNumber)
+		
 		return view
 	}
 

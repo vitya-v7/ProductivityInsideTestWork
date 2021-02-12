@@ -16,6 +16,4 @@ class ComputerGuessesNumberViewModel {
 		self.roundNumber = roundNumber
 		self.guessedNumberByComputer = guessedNumberByComputer
 	}
-
-	init() {}
 }

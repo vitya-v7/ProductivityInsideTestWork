@@ -31,24 +31,33 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 	@IBOutlet weak var equalButton: UIButton!
 	@IBOutlet weak var lessButton: UIButton!
 
+	@IBAction func guessedNumberIsGreater(_ sender: UIButton) {
+		output?.greaterButtonPressed()
+	}
+
+	@IBAction func guessedNumberIsLess(_ sender: UIButton) {
+		output?.lessButtonPressed()
+	}
+
+	@IBAction func guessedNumberIsEqual(_ sender: UIButton) {
+		output?.equalButtonPressed()
+	}
+	
 	var output: ComputerGuessesNumberViewOutput?
-	var viewModel = ComputerGuessesNumberViewModel()
+	var viewModel: ComputerGuessesNumberViewModel?
 
 	func setInitialState() {}
 
 	func setViewModel(viewModel: ComputerGuessesNumberViewModel) {
 		self.viewModel = viewModel
-		self.roundNumber.text = "Round №" + String(self.viewModel.roundNumber!)
+		self.roundNumber.text = "Round №" + String(self.viewModel!.roundNumber!)
 		self.computerGuesses.text = "Computer Guesses"
-		self.guessedNumberByComputer.text = "Number is - " + String(self.viewModel.guessedNumberByComputer!)
+		self.guessedNumberByComputer.text = "Number is - " + String(self.viewModel!.guessedNumberByComputer!)
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationController?.navigationItem.setHidesBackButton(true, animated: false)
-		greaterButton.addTarget(self, action: #selector(guessedNumberIsGreater(_:)), for: .touchUpInside)
-		lessButton.addTarget(self, action: #selector(guessedNumberIsLess(_:)), for: .touchUpInside)
-		equalButton.addTarget(self, action: #selector(guessedNumberIsEqual(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
 	}
 
@@ -60,18 +69,6 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 	func unsetAlert() {
 		let text = NSAttributedString.init(string: "Computer Guesses", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
 		self.computerGuesses.attributedText = text
-	}
-
-	@objc func guessedNumberIsGreater(_: UIButton) {
-		output?.greaterButtonPressed()
-	}
-
-	@objc func guessedNumberIsLess(_: UIButton) {
-		output?.lessButtonPressed()
-	}
-
-	@objc func guessedNumberIsEqual(_: UIButton) {
-		output?.equalButtonPressed()
 	}
 }
 

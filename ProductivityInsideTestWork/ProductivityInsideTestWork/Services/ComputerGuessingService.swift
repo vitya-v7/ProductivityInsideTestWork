@@ -20,6 +20,7 @@ protocol ComputerGuessingServiceInterface {
 }
 
 class ComputerGuessingService: ComputerGuessingServiceInterface {
+
 	let minNumber:Int
 	let maxNumber:Int
 

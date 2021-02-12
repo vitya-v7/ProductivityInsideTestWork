@@ -24,7 +24,8 @@ protocol IUserGuessesNumberComplete {
 	func userGuessesNumberModuleComplete(attempts: Int)
 }
 
-class GameRoundsPresenter: GameRoundControllerOutput {
+class GameRoundsPresenter {
+	
 	weak var gameController: GameRoundControllerInput?
 	var roundNumber = Constants.startRound
 	var computerWins = 0
@@ -54,6 +55,7 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 			index = 0
 		}
 		nextModule = NavigationModule(rawValue: index)!
+
 		return nextModule
 	}
 
@@ -71,7 +73,6 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 		case .setNumberToGuessModule:
 			let view = (moduleView as! SetNumberToGuessView)
 			view.output?.setRoundNumber(roundNumber: roundNumber)
-
 			(view.output as! SetNumberToGuessPresenter).moduleOutput = self as ISetNumberToGuessModuleComplete
 		case .startNewGameModule:
 			let startView = (moduleView as! StartNewGameView)
@@ -92,12 +93,9 @@ class GameRoundsPresenter: GameRoundControllerOutput {
 
 	func returnNextModule(parameters: Any? = nil) -> UIViewController {
 		currentModule = getNextModuleEnum(currentModule: currentModule)
-		return returnCurrentModule(parameters: parameters)
-	}
-
-	func returnCurrentModule(parameters: Any? = nil) -> UIViewController {
 		let moduleView = getModuleByEnum(moduleName: currentModule)
 		setParametersForModule(moduleView: moduleView, parameters: parameters)
+		
 		return moduleView
 	}
 }
@@ -109,13 +107,11 @@ extension GameRoundsPresenter: IStartNewModuleComplete {
 		if roundNumber == Constants.startRound {
 			gameController?.dismissLastModule(animated: true)
 		}
-
 	}
 }
 
 extension GameRoundsPresenter: ISetNumberToGuessModuleComplete {
 	func setNumberToGuessModuleComplete(guessedNumberByUser: Int) {
-		
 		let moduleView = returnNextModule(parameters: guessedNumberByUser)
 		gameController?.pushNextModule(view: moduleView, animated: true)
 	}

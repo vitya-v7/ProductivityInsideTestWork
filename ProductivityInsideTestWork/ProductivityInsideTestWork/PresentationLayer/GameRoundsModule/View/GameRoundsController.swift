@@ -15,13 +15,7 @@ protocol GameRoundControllerInput : UIViewController  {
 	func dismissLastModule(animated: Bool)
 }
 
-protocol GameRoundControllerOutput {
-
-}
-
 final class GameRoundsController: UINavigationController, GameRoundControllerInput {
-
-	var output: GameRoundControllerOutput?
 	
 	func pushNextModule(view: UIViewController, animated: Bool) {
 		navigationBar.isHidden = true

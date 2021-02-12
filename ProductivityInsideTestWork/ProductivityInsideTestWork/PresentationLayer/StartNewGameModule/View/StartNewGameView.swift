@@ -25,6 +25,10 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 	@IBOutlet weak var gameResults: UILabel!
 	@IBOutlet weak var startNewGameButton: UIButton!
 	
+	@IBAction func startNewGame(_ sender: UIButton) {
+		output?.onStartButtonTap()
+	}
+
 	var output: StartNewGameViewOutput?
 	var viewModel: StartNewGameViewModel?
 	
@@ -39,12 +43,8 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		startNewGameButton.addTarget(self, action: #selector(startNewGame(_:)), for: .touchUpInside)
 		output?.viewDidLoadDone()
 	}
 	
-	@objc func startNewGame(_: UIButton) {
-		output?.onStartButtonTap()
-	}	
 }
 
