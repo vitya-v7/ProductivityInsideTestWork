@@ -8,25 +8,25 @@
 import Foundation
 import UIKit
 
-protocol IStartNewModuleComplete {
+protocol IStartNewGameModuleOutput {
 	func startNewGameModuleComplete()
 }
 
-protocol ISetNumberToGuessModuleComplete {
+protocol ISetNumberToGuessModuleOutput {
 	func setNumberToGuessModuleComplete(guessedNumberByUser: Int)
 }
 
-protocol IComputerGuessesNumberComplete {
+protocol IComputerGuessesNumberModuleOutput {
 	func computerGuessesNumberModuleComplete(attempts: Int)
 }
 
-protocol IUserGuessesNumberComplete {
+protocol IUserGuessesNumberModuleOutput {
 	func userGuessesNumberModuleComplete(attempts: Int)
 }
 
 class GameRoundsPresenter {
 	
-	weak var gameController: GameRoundControllerInput?
+	weak var gameController: GameRoundViewInput?
 	var roundNumber = Constants.startRound
 	var computerWins = 0
 	var userWins = 0
@@ -63,31 +63,30 @@ class GameRoundsPresenter {
 		switch currentModule {
 		case .computerGuessesNumberModule:
 			let view = (moduleView as! ComputerGuessesNumberView)
-			view.output?.setRoundNumber(roundNumber: roundNumber)
-			(view.output! as! ComputerGuessesNumberPresenter).guessedNumber = parameters as! Int
-			(view.output as! ComputerGuessesNumberPresenter).moduleOutput = self as IComputerGuessesNumberComplete
+			let moduleInput = view.output as! IComputerGuessesNumberModuleInput
+			moduleInput.setRoundNumber(roundNumber: roundNumber)
+			moduleInput.setModuleOutput(moduleOutput: self as IComputerGuessesNumberModuleOutput)
+			moduleInput.setGuessedNumber(guessedNumber: parameters as! Int)
 		case .userGuessesNumberModule:
 			let view = (moduleView as! UserGuessesNumberView)
-			view.output?.setRoundNumber(roundNumber: roundNumber)
-			(view.output as! UserGuessesNumberPresenter).moduleOutput = self as IUserGuessesNumberComplete
+			let moduleInput = view.output as! IUserGuessesNumberModuleInput
+			moduleInput.setRoundNumber(roundNumber: roundNumber)
+			moduleInput.setModuleOutput(moduleOutput: self as IUserGuessesNumberModuleOutput)
 		case .setNumberToGuessModule:
 			let view = (moduleView as! SetNumberToGuessView)
-			view.output?.setRoundNumber(roundNumber: roundNumber)
-			(view.output as! SetNumberToGuessPresenter).moduleOutput = self as ISetNumberToGuessModuleComplete
+			let moduleInput = view.output as! ISetNumberToGuessModuleInput
+			moduleInput.setRoundNumber(roundNumber: roundNumber)
+			moduleInput.setModuleOutput(moduleOutput: self as ISetNumberToGuessModuleOutput)
 		case .startNewGameModule:
 			let startView = (moduleView as! StartNewGameView)
-			if roundNumber == Constants.totalRoundNumber {
-				if computerWins > userWins {
-					startView.output?.setGameState(state: GameState.lose)
-				}
-				else {
-					startView.output?.setGameState(state: GameState.win)
-				}
+			let moduleInput = startView.output as! IStartNewGameModuleInput
+			if roundNumber == Constants.totalRoundNumber + 1 {
+				moduleInput.setGameState(state: parameters as! GameState)
 			}
 			else {
-				startView.output?.setGameState(state: GameState.newGame)
+				moduleInput.setGameState(state: GameState.newGame)
 			}
-			(startView.output as! StartNewGamePresenter).moduleOutput = self as IStartNewModuleComplete
+			moduleInput.setModuleOutput(moduleOutput: self as IStartNewGameModuleOutput)
 		}
 	}
 
@@ -100,7 +99,7 @@ class GameRoundsPresenter {
 	}
 }
 
-extension GameRoundsPresenter: IStartNewModuleComplete {
+extension GameRoundsPresenter: IStartNewGameModuleOutput {
 	func startNewGameModuleComplete() {
 		let moduleView = returnNextModule()
 		gameController?.setViewControllersAsFirst(firstController: moduleView)
@@ -110,14 +109,14 @@ extension GameRoundsPresenter: IStartNewModuleComplete {
 	}
 }
 
-extension GameRoundsPresenter: ISetNumberToGuessModuleComplete {
+extension GameRoundsPresenter: ISetNumberToGuessModuleOutput {
 	func setNumberToGuessModuleComplete(guessedNumberByUser: Int) {
 		let moduleView = returnNextModule(parameters: guessedNumberByUser)
 		gameController?.pushNextModule(view: moduleView, animated: true)
 	}
 }
 
-extension GameRoundsPresenter: IComputerGuessesNumberComplete {
+extension GameRoundsPresenter: IComputerGuessesNumberModuleOutput {
 	func computerGuessesNumberModuleComplete(attempts: Int) {
 		computerAttemptsInCurrentRound = attempts
 		let moduleView = returnNextModule()
@@ -125,7 +124,7 @@ extension GameRoundsPresenter: IComputerGuessesNumberComplete {
 	}
 }
 
-extension GameRoundsPresenter: IUserGuessesNumberComplete {
+extension GameRoundsPresenter: IUserGuessesNumberModuleOutput {
 	func userGuessesNumberModuleComplete(attempts: Int) {
 		userAttemptsInCurrentRound = attempts
 		roundNumber = roundNumber + 1
@@ -148,6 +147,8 @@ extension GameRoundsPresenter: IUserGuessesNumberComplete {
 				moduleView = returnNextModule(parameters: GameState.win)
 			}
 			roundNumber = Constants.startRound
+			userWins = 0
+			computerWins = 0
 			gameController?.presentResultModule(view: moduleView, animated: true)
 		}
 	}

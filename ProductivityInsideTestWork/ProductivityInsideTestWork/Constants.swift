@@ -28,8 +28,3 @@ public enum GameState: String {
 	case lose = "You lose"
 	case newGame = ""
 }
-
-public enum ViewControllerMode {
-	case push
-	case present
-}

@@ -8,11 +8,16 @@
 import Foundation
 import UIKit
 
+protocol ISetNumberToGuessModuleInput {
+	func setModuleOutput(moduleOutput: ISetNumberToGuessModuleOutput)
+	func setRoundNumber(roundNumber: Int)
+}
+
 class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	
 	weak var view: SetNumberToGuessViewInput?
 	var viewModel: SetNumberToGuessViewModel!
-	var moduleOutput: ISetNumberToGuessModuleComplete?
+	var moduleOutput: ISetNumberToGuessModuleOutput?
 	var roundNumber = 0
 	
 	func viewDidLoadDone() {
@@ -20,14 +25,20 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
 	}
-	
-	func setRoundNumber(roundNumber: Int) {
-		self.roundNumber = roundNumber
-	}
-	
+
 	func numberWasEntered(number: Int) {
 		viewModel?.guessedNumber = number
 		moduleOutput?.setNumberToGuessModuleComplete(guessedNumberByUser: number)
 	}
 }
 
+extension SetNumberToGuessPresenter: ISetNumberToGuessModuleInput {
+
+	func setRoundNumber(roundNumber: Int) {
+		self.roundNumber = roundNumber
+	}
+
+	func setModuleOutput(moduleOutput: ISetNumberToGuessModuleOutput) {
+		self.moduleOutput = moduleOutput
+	}
+}

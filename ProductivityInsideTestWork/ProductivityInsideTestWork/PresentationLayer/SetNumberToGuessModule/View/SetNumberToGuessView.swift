@@ -15,7 +15,6 @@ protocol SetNumberToGuessViewInput : UIViewController  {
 protocol SetNumberToGuessViewOutput {
 	func viewDidLoadDone()
 	func numberWasEntered(number: Int)
-	func setRoundNumber(roundNumber: Int)
 }
 
 class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {

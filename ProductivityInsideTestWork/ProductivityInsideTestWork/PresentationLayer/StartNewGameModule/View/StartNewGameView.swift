@@ -16,7 +16,6 @@ protocol StartNewGameViewInput : UIViewController  {
 protocol StartNewGameViewOutput {
 	func viewDidLoadDone()
 	func onStartButtonTap()
-	func setGameState(state: GameState)
 }
 
 class StartNewGameView: UIViewController, StartNewGameViewInput {

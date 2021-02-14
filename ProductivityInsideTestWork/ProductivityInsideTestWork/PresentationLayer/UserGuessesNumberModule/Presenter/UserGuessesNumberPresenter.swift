@@ -8,23 +8,24 @@
 import Foundation
 import UIKit
 
+protocol IUserGuessesNumberModuleInput {
+	func setModuleOutput(moduleOutput: IUserGuessesNumberModuleOutput)
+	func setRoundNumber(roundNumber: Int)
+}
+
 class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	
 	weak var view: UserGuessesNumberViewInput?
 	var viewModel: UserGuessesNumberViewModel!
 	var userGuessingService: UserGuessingServiceInterface!
 	var roundNumber: Int = 0
-	var moduleOutput: IUserGuessesNumberComplete?
+	var moduleOutput: IUserGuessesNumberModuleOutput?
 
 	func viewDidLoadDone() {
 		userGuessingService.startGame()
 		viewModel = UserGuessesNumberViewModel(roundNumber: roundNumber, numberTip: .none)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
-	}
-
-	func setRoundNumber(roundNumber: Int) {
-		self.roundNumber = roundNumber
 	}
 
 	func numberWasEntered(number: Int) {
@@ -35,5 +36,16 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 			viewModel = UserGuessesNumberViewModel(roundNumber: viewModel.roundNumber, numberTip: result)
 			view?.setViewModel(viewModel: viewModel!)
 		}
+	}
+}
+
+extension UserGuessesNumberPresenter {
+
+	func setModuleOutput(moduleOutput: IUserGuessesNumberModuleOutput) {
+		self.moduleOutput = moduleOutput
+	}
+	
+	func setRoundNumber(roundNumber: Int) {
+		self.roundNumber = roundNumber
 	}
 }

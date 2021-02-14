@@ -8,6 +8,12 @@
 import Foundation
 import UIKit
 
+protocol IComputerGuessesNumberModuleInput {
+	func setModuleOutput(moduleOutput: IComputerGuessesNumberModuleOutput)
+	func setRoundNumber(roundNumber: Int)
+	func setGuessedNumber(guessedNumber: Int)
+}
+
 class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	weak var view: ComputerGuessesNumberViewInput?
@@ -15,7 +21,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	var computerGuessingService: ComputerGuessingServiceInterface!
 	var roundNumber: Int = 0
 	var guessedNumber: Int = 0
-	var moduleOutput: IComputerGuessesNumberComplete?
+	var moduleOutput: IComputerGuessesNumberModuleOutput?
 
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
 	func viewDidLoadDone() {
@@ -23,10 +29,6 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 		viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber, guessedNumberByComputer: computerNumber)
 		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
-	}
-
-	func setRoundNumber(roundNumber: Int) {
-		self.roundNumber = roundNumber
 	}
 	
 	//Используется бинарный поиск для угадывания числа, заданного пользователем
@@ -75,5 +77,20 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 		catch  {
 			fatalError("lessButtonPressed() - unknown error")
 		}
+	}
+}
+
+extension ComputerGuessesNumberPresenter: IComputerGuessesNumberModuleInput {
+
+	func setModuleOutput(moduleOutput: IComputerGuessesNumberModuleOutput) {
+		self.moduleOutput = moduleOutput
+	}
+
+	func setRoundNumber(roundNumber: Int) {
+		self.roundNumber = roundNumber
+	}
+
+	func setGuessedNumber(guessedNumber: Int) {
+		self.guessedNumber = guessedNumber
 	}
 }

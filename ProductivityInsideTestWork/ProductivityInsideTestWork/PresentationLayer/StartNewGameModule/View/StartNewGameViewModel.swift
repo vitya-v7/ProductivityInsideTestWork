@@ -10,7 +10,7 @@ import Foundation
 class StartNewGameViewModel {
 	
 	let title: String
-	let gameState: GameState
+	var gameState: GameState
 	let buttonLabel = "Start New Game"
 	
 	init(gameState: GameState = .newGame) {
