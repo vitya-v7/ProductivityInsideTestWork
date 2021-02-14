@@ -102,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84AEDB2E25D907350044792E /* TextFieldExtension */ = {
+			isa = PBXGroup;
+			children = (
+				84AEDB2825D902960044792E /* UITextFieldExtension.swift */,
+			);
+			path = TextFieldExtension;
+			sourceTree = "<group>";
+		};
 		84B23A8525D1391F0028F4DB /* GameRoundsModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +305,7 @@
 		D9AF6B4425D02CB800A016DF /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				84AEDB2825D902960044792E /* UITextFieldExtension.swift */,
+				84AEDB2E25D907350044792E /* TextFieldExtension */,
 				84B23A8525D1391F0028F4DB /* GameRoundsModule */,
 				D9AF6B4525D02CCA00A016DF /* Common */,
 				84B338DF25B0C79B0088CCC0 /* StartNewGameModule */,

@@ -17,27 +17,26 @@ protocol IComputerGuessesNumberModuleInput {
 class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 
 	weak var view: ComputerGuessesNumberViewInput?
-	var viewModel: ComputerGuessesNumberViewModel?
 	var computerGuessingService: ComputerGuessingServiceInterface!
-	var roundNumber: Int = Constants.startRound
-	var guessedNumber: Int!
 	var moduleOutput: IComputerGuessesNumberModuleOutput?
+	var guessedNumberByComputer: Int?
+	var roundNumber: Int?
 
-	//Используется бинарный поиск для угадывания числа, заданного пользователем
+	// computer uses binary search to guess number
 	func viewDidLoadDone() {
-		let computerNumber = computerGuessingService.startGame(guessedNumber: guessedNumber)
-		viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber, guessedNumberByComputer: computerNumber)
-		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
+		let computerNumber = computerGuessingService.startGame(guessedNumber: guessedNumberByComputer!)
+		let viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber!, guessedNumberByComputer: computerNumber)
+		view?.setViewModel(viewModel: viewModel)
 	}
-	
-	//Используется бинарный поиск для угадывания числа, заданного пользователем
+
+	// computer uses binary search to guess number
 	func greaterButtonPressed() {
 		do {
 			let computerNumber = try computerGuessingService.greater()
 			view?.unsetAlert()
-			viewModel?.guessedNumberByComputer = computerNumber
-			view?.setViewModel(viewModel: viewModel!)
+			let viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber!, guessedNumberByComputer: computerNumber)
+			view?.setViewModel(viewModel: viewModel)
 		}
 		catch ComputerGuessingService.WrongButton.unfairGame(let message) {
 			view?.setAlert(string: message)
@@ -52,8 +51,8 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 		do {
 			let computerNumber = try computerGuessingService.less()
 			view?.unsetAlert()
-			viewModel?.guessedNumberByComputer = computerNumber
-			view?.setViewModel(viewModel: viewModel!)
+			let viewModel = ComputerGuessesNumberViewModel(roundNumber: roundNumber!, guessedNumberByComputer: computerNumber)
+			view?.setViewModel(viewModel: viewModel)
 		}
 		catch ComputerGuessingService.WrongButton.unfairGame(let message) {
 			view?.setAlert(string: message)
@@ -67,6 +66,7 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	func equalButtonPressed() {
 		do {
 			try computerGuessingService.equal()
+			// no exceptions = computer guessed user's number
 			view?.unsetAlert()
 			moduleOutput?.computerGuessesNumberModuleComplete(attempts: computerGuessingService.attempts)
 		}
@@ -91,6 +91,6 @@ extension ComputerGuessesNumberPresenter: IComputerGuessesNumberModuleInput {
 	}
 
 	func setGuessedNumber(guessedNumber: Int) {
-		self.guessedNumber = guessedNumber
+		self.guessedNumberByComputer = guessedNumber
 	}
 }

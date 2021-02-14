@@ -9,17 +9,16 @@ import Foundation
 
 class StartNewGameViewModel {
 	
-	let title: String
+	var title: String?
 	var gameState: GameState
-	let buttonLabel = "Start New Game"
 	
 	init(gameState: GameState = .newGame) {
 		self.gameState = gameState
 		if self.gameState == .win {
-			self.title = "Congratulations"
+			self.title = Constants.congratulations
 		}
 		else if self.gameState == .newGame {
-			self.title = "Guess The Number: The Game"
+			self.title = Constants.gameName
 		}
 		else {
 			self.title = ""

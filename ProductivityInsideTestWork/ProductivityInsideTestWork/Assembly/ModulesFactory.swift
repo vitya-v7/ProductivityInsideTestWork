@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class ModulesFactory {
-	
+
+	// assembly main game module
 	class func createGameRoundsModuleAndStart() -> GameRoundsController {
 		let navVc = GameRoundsController()
 		let presenter = GameRoundsPresenter()
@@ -21,7 +22,7 @@ class ModulesFactory {
 
 		return navVc
 	}
-	
+
 	class func createStartNewGameModule() -> UIViewController {
 		let storyboard = UIStoryboard.init(name: ModulesConstants.mainStoriboardName, bundle: nil)
 		let view = storyboard.instantiateViewController(identifier: ModulesConstants.startNewGameViewIdentifier) as! StartNewGameView

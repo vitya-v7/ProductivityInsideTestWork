@@ -16,13 +16,13 @@ protocol IStartNewGameModuleInput {
 class StartNewGamePresenter: StartNewGameViewOutput {
 
 	weak var view: StartNewGameViewInput?
-	var viewModel: StartNewGameViewModel?
 	var moduleOutput: IStartNewGameModuleOutput?
+	var gameState: GameState?
 	
 	func viewDidLoadDone() {
-		viewModel = StartNewGameViewModel(gameState: viewModel?.gameState ?? .newGame)
-		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
+		let viewModel = StartNewGameViewModel(gameState: gameState!)
+		view?.setViewModel(viewModel: viewModel)
 	}
 
 	func onStartButtonTap() {
@@ -37,9 +37,6 @@ extension StartNewGamePresenter: IStartNewGameModuleInput {
 	}
 
 	func setGameState(state: GameState) {
-		if let viewModel = viewModel {
-			viewModel.gameState = state
-			view?.setViewModel(viewModel: viewModel)
-		}
+		self.gameState = state
 	}
 }

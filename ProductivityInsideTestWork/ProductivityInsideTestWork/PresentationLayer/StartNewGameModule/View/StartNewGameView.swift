@@ -31,19 +31,23 @@ class StartNewGameView: UIViewController, StartNewGameViewInput {
 	var output: StartNewGameViewOutput?
 	var viewModel: StartNewGameViewModel?
 	
-	func setInitialState() {}
+	func setInitialState() {
+		updateInitialUI()
+	}
 	
 	func setViewModel(viewModel: StartNewGameViewModel) {
 		self.viewModel = viewModel
 		gameName.text = viewModel.title
 		gameResults.text = viewModel.gameState.rawValue
-		startNewGameButton.setTitle(viewModel.buttonLabel, for: .normal)
 	}
-	
+
+	func updateInitialUI() {
+		startNewGameButton.setTitle(Constants.startNewGameButtonText, for: .normal)
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		output?.viewDidLoadDone()
 	}
-	
 }
 

@@ -16,25 +16,25 @@ protocol IUserGuessesNumberModuleInput {
 class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	
 	weak var view: UserGuessesNumberViewInput?
-	var viewModel: UserGuessesNumberViewModel!
 	var userGuessingService: UserGuessingServiceInterface!
-	var roundNumber: Int = 0
 	var moduleOutput: IUserGuessesNumberModuleOutput?
+	var roundNumber: Int?
 
 	func viewDidLoadDone() {
 		userGuessingService.startGame()
-		viewModel = UserGuessesNumberViewModel(roundNumber: roundNumber, numberTip: .none)
-		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
+		let viewModel = UserGuessesNumberViewModel(roundNumber: roundNumber!, numberTip: .none)
+		view?.setViewModel(viewModel: viewModel)
 	}
 
 	func numberWasEntered(number: Int) {
 		let result = userGuessingService.numberWasEntered(number: number)
+		// user guessed computer number
 		if result == .equal {
 			moduleOutput?.userGuessesNumberModuleComplete(attempts: userGuessingService.attempts)
 		} else {
-			viewModel = UserGuessesNumberViewModel(roundNumber: viewModel.roundNumber, numberTip: result)
-			view?.setViewModel(viewModel: viewModel!)
+			let viewModel = UserGuessesNumberViewModel(roundNumber: roundNumber!, numberTip: result)
+			view?.setViewModel(viewModel: viewModel)
 		}
 	}
 }

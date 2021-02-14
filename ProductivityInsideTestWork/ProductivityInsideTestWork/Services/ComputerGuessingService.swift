@@ -85,6 +85,7 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 
 	// MARK: Private
 
+	// computer uses binary search to guess number
 	private func getComputerNumber(min:Int, max:Int, numberTip:NumberTips) -> Int {
 		var difference = maxGuessingNumber - minGuessingNumber
 		let differenceIsEven = difference % 2 == 0

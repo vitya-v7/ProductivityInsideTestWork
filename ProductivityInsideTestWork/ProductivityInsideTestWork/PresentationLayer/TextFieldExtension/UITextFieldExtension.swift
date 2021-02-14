@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// add toolbar on keyboard with "Cancel" and "Done" buttons for user's convenience
 extension UITextField {
 	func addDoneCancelToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
 		let onCancel = onCancel ?? (target: self, action: #selector(cancelButtonTapped))
@@ -25,7 +26,7 @@ extension UITextField {
 		self.inputAccessoryView = toolbar
 	}
 
-	// Default actions:
+	// default behavior
 	@objc func doneButtonTapped() { self.resignFirstResponder() }
 	@objc func cancelButtonTapped() { self.resignFirstResponder() }
 }

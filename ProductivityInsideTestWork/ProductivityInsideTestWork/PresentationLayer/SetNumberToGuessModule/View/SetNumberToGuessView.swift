@@ -44,14 +44,14 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 		updateInitialUI()
 	}
 
-	func setViewModel(viewModel: SetNumberToGuessViewModel) {
-		self.viewModel = viewModel
-	}
-
 	func updateInitialUI() {
-		self.roundNumber.text = String("Round №\(self.viewModel!.roundNumber)")
 		self.acceptNumber.setTitle("Enter the number", for: .normal)
 		self.enterNumber.placeholder = "Введите число"
+	}
+	
+	func setViewModel(viewModel: SetNumberToGuessViewModel) {
+		self.viewModel = viewModel
+		self.roundNumber.text = String("Round №\(self.viewModel!.roundNumber)")
 	}
 
 	override func viewDidLoad() {

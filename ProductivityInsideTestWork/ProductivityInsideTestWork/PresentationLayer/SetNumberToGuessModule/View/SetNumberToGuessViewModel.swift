@@ -8,7 +8,8 @@
 import Foundation
 
 class SetNumberToGuessViewModel {
-	let roundNumber: Int
+	
+	var roundNumber: Int
 	var guessedNumber: Int?
 	
 	init(roundNumber: Int) {

@@ -46,12 +46,20 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 	var output: ComputerGuessesNumberViewOutput?
 	var viewModel: ComputerGuessesNumberViewModel?
 
-	func setInitialState() {}
+	func setInitialState() {
+		updateInitialUI()
+	}
+
+	func updateInitialUI() {
+		self.computerGuesses.text = "Computer Guesses"
+		self.greaterButton.setTitle(">", for: .normal)
+		self.lessButton.setTitle("<", for: .normal)
+		self.equalButton.setTitle("=", for: .normal)
+	}
 
 	func setViewModel(viewModel: ComputerGuessesNumberViewModel) {
 		self.viewModel = viewModel
 		self.roundNumber.text = "Round №" + String(self.viewModel!.roundNumber!)
-		self.computerGuesses.text = "Computer Guesses"
 		self.guessedNumberByComputer.text = "Number is - " + String(self.viewModel!.guessedNumberByComputer!)
 	}
 
@@ -60,6 +68,7 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 		output?.viewDidLoadDone()
 	}
 
+	// user pressed wrong button
 	func setAlert(string: String) {
 		let text = NSAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 		self.computerGuesses.attributedText = text

@@ -16,18 +16,19 @@ protocol ISetNumberToGuessModuleInput {
 class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	
 	weak var view: SetNumberToGuessViewInput?
-	var viewModel: SetNumberToGuessViewModel!
 	var moduleOutput: ISetNumberToGuessModuleOutput?
-	var roundNumber = 0
-	
+	var roundNumber: Int?
+
 	func viewDidLoadDone() {
-		viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber)
-		view?.setViewModel(viewModel: viewModel!)
 		view?.setInitialState()
+		let viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber!)
+		view?.setViewModel(viewModel: viewModel)
 	}
 
 	func numberWasEntered(number: Int) {
-		viewModel?.guessedNumber = number
+		let viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber!)
+		viewModel.guessedNumber = number
+		view?.setViewModel(viewModel: viewModel)
 		moduleOutput?.setNumberToGuessModuleComplete(guessedNumberByUser: number)
 	}
 }

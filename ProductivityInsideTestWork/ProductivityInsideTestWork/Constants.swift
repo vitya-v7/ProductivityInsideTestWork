@@ -14,6 +14,9 @@ enum Constants {
 	static let numberOfRecyclingViews = 3
 	static let startRound = 1
 	static let unfairGame = "Press the right button!"
+	static let gameName = "Guess The Number: The Game"
+	static let congratulations = "Congratulations"
+	static let startNewGameButtonText = "Start new game"
 }
 
 public enum NavigationModuleType: Int {

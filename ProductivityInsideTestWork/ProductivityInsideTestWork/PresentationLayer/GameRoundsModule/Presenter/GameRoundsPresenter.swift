@@ -128,28 +128,37 @@ extension GameRoundsPresenter: IUserGuessesNumberModuleOutput {
 	func userGuessesNumberModuleComplete(attempts: Int) {
 		userAttemptsInCurrentRound = attempts
 		roundNumber = roundNumber + 1
+		// check who won in the previous round
+		if computerAttemptsInCurrentRound < userAttemptsInCurrentRound {
+			computerWins = computerWins + 1
+		}
+		else {
+			userWins = userWins + 1
+		}
 		if roundNumber <= Constants.totalRoundNumber {
-			if computerAttemptsInCurrentRound < userAttemptsInCurrentRound {
-				computerWins = computerWins + 1
-			}
-			else {
-				userWins = userWins + 1
-			}
+			// next round
 			let moduleView = configureNextModule()
 			gameController?.setViewControllersAsFirst(firstController: moduleView)
 		}
 		else {
+			// game is finished
 			let moduleView: UIViewController
+			// check who is the winner
 			if computerWins > userWins {
 				moduleView = configureNextModule(parameters: GameState.lose)
 			}
 			else {
 				moduleView = configureNextModule(parameters: GameState.win)
 			}
-			roundNumber = Constants.startRound
-			userWins = 0
-			computerWins = 0
+			// show who is the winner and new game
+			resetGameValues()
 			gameController?.presentResultModule(view: moduleView, animated: true)
 		}
+	}
+
+	private func resetGameValues() {
+		roundNumber = Constants.startRound
+		userWins = 0
+		computerWins = 0
 	}
 }
