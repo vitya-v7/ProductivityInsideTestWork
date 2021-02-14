@@ -19,8 +19,8 @@ class ComputerGuessesNumberPresenter: ComputerGuessesNumberViewOutput {
 	weak var view: ComputerGuessesNumberViewInput?
 	var viewModel: ComputerGuessesNumberViewModel?
 	var computerGuessingService: ComputerGuessingServiceInterface!
-	var roundNumber: Int = 0
-	var guessedNumber: Int = 0
+	var roundNumber: Int = Constants.startRound
+	var guessedNumber: Int!
 	var moduleOutput: IComputerGuessesNumberModuleOutput?
 
 	//Используется бинарный поиск для угадывания числа, заданного пользователем

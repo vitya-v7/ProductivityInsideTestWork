@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84ACB43325CB8C5B0019807D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACB43225CB8C5B0019807D /* Constants.swift */; };
+		84AEDB2925D902960044792E /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEDB2825D902960044792E /* UITextFieldExtension.swift */; };
 		84B23A8B25D1396C0028F4DB /* GameRoundsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B23A8A25D1396C0028F4DB /* GameRoundsPresenter.swift */; };
 		84B23A8F25D139B00028F4DB /* GameRoundsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B23A8E25D139B00028F4DB /* GameRoundsController.swift */; };
 		84B338CB25B022180088CCC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B338CA25B022180088CCC0 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		84ACB43225CB8C5B0019807D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		84AEDB2825D902960044792E /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		84B23A8A25D1396C0028F4DB /* GameRoundsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoundsPresenter.swift; sourceTree = "<group>"; };
 		84B23A8E25D139B00028F4DB /* GameRoundsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoundsController.swift; sourceTree = "<group>"; };
 		84B338C725B022180088CCC0 /* ProductivityInsideTestWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductivityInsideTestWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,6 +297,7 @@
 		D9AF6B4425D02CB800A016DF /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				84AEDB2825D902960044792E /* UITextFieldExtension.swift */,
 				84B23A8525D1391F0028F4DB /* GameRoundsModule */,
 				D9AF6B4525D02CCA00A016DF /* Common */,
 				84B338DF25B0C79B0088CCC0 /* StartNewGameModule */,
@@ -423,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B23A8F25D139B00028F4DB /* GameRoundsController.swift in Sources */,
+				84AEDB2925D902960044792E /* UITextFieldExtension.swift in Sources */,
 				84B3390B25B0DD640088CCC0 /* ComputerGuessesNumberViewModel.swift in Sources */,
 				84ACB43325CB8C5B0019807D /* Constants.swift in Sources */,
 				84B5950925D5347200FC3456 /* KeyboardHandler.swift in Sources */,

@@ -39,7 +39,7 @@ class UserGuessesNumberPresenter: UserGuessesNumberViewOutput {
 	}
 }
 
-extension UserGuessesNumberPresenter {
+extension UserGuessesNumberPresenter: IUserGuessesNumberModuleInput {
 
 	func setModuleOutput(moduleOutput: IUserGuessesNumberModuleOutput) {
 		self.moduleOutput = moduleOutput

@@ -28,8 +28,6 @@ class StartNewGamePresenter: StartNewGameViewOutput {
 	func onStartButtonTap() {
 		moduleOutput?.startNewGameModuleComplete()
 	}
-
-
 }
 
 extension StartNewGamePresenter: IStartNewGameModuleInput {

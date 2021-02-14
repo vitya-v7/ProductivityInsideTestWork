@@ -32,10 +32,10 @@ class GameRoundsPresenter {
 	var userWins = 0
 	var userAttemptsInCurrentRound = 0
 	var computerAttemptsInCurrentRound = 0
-	var currentModule: NavigationModule = .startNewGameModule
+	var currentModule: NavigationModuleType = .startNewGameModule
 	var roundEnded = false
 
-	func getModuleByEnum(moduleName: NavigationModule) -> UIViewController {
+	func getModuleByEnum(moduleName: NavigationModuleType) -> UIViewController {
 		switch moduleName {
 		case .startNewGameModule:
 			return ModulesFactory.createStartNewGameModule()
@@ -48,13 +48,13 @@ class GameRoundsPresenter {
 		}
 	}
 
-	func getNextModuleEnum(currentModule: NavigationModule) -> NavigationModule {
+	func getNextModuleEnum(currentModule: NavigationModuleType) -> NavigationModuleType {
 		var nextModule = currentModule
 		var index = nextModule.rawValue % Constants.numberOfRecyclingViews + 1
 		if roundNumber == Constants.totalRoundNumber + 1 {
 			index = 0
 		}
-		nextModule = NavigationModule(rawValue: index)!
+		nextModule = NavigationModuleType(rawValue: index)!
 
 		return nextModule
 	}
@@ -90,7 +90,7 @@ class GameRoundsPresenter {
 		}
 	}
 
-	func returnNextModule(parameters: Any? = nil) -> UIViewController {
+	func configureNextModule(parameters: Any? = nil) -> UIViewController {
 		currentModule = getNextModuleEnum(currentModule: currentModule)
 		let moduleView = getModuleByEnum(moduleName: currentModule)
 		setParametersForModule(moduleView: moduleView, parameters: parameters)
@@ -101,7 +101,7 @@ class GameRoundsPresenter {
 
 extension GameRoundsPresenter: IStartNewGameModuleOutput {
 	func startNewGameModuleComplete() {
-		let moduleView = returnNextModule()
+		let moduleView = configureNextModule()
 		gameController?.setViewControllersAsFirst(firstController: moduleView)
 		if roundNumber == Constants.startRound {
 			gameController?.dismissLastModule(animated: true)
@@ -111,7 +111,7 @@ extension GameRoundsPresenter: IStartNewGameModuleOutput {
 
 extension GameRoundsPresenter: ISetNumberToGuessModuleOutput {
 	func setNumberToGuessModuleComplete(guessedNumberByUser: Int) {
-		let moduleView = returnNextModule(parameters: guessedNumberByUser)
+		let moduleView = configureNextModule(parameters: guessedNumberByUser)
 		gameController?.pushNextModule(view: moduleView, animated: true)
 	}
 }
@@ -119,7 +119,7 @@ extension GameRoundsPresenter: ISetNumberToGuessModuleOutput {
 extension GameRoundsPresenter: IComputerGuessesNumberModuleOutput {
 	func computerGuessesNumberModuleComplete(attempts: Int) {
 		computerAttemptsInCurrentRound = attempts
-		let moduleView = returnNextModule()
+		let moduleView = configureNextModule()
 		gameController?.pushNextModule(view: moduleView, animated: true)
 	}
 }
@@ -135,16 +135,16 @@ extension GameRoundsPresenter: IUserGuessesNumberModuleOutput {
 			else {
 				userWins = userWins + 1
 			}
-			let moduleView = returnNextModule()
+			let moduleView = configureNextModule()
 			gameController?.setViewControllersAsFirst(firstController: moduleView)
 		}
 		else {
 			let moduleView: UIViewController
 			if computerWins > userWins {
-				moduleView = returnNextModule(parameters: GameState.lose)
+				moduleView = configureNextModule(parameters: GameState.lose)
 			}
 			else {
-				moduleView = returnNextModule(parameters: GameState.win)
+				moduleView = configureNextModule(parameters: GameState.win)
 			}
 			roundNumber = Constants.startRound
 			userWins = 0

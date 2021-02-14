@@ -16,7 +16,7 @@ enum Constants {
 	static let unfairGame = "Press the right button!"
 }
 
-public enum NavigationModule: Int {
+public enum NavigationModuleType: Int {
 	case startNewGameModule = 0
 	case setNumberToGuessModule = 1
 	case computerGuessesNumberModule = 2

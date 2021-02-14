@@ -22,12 +22,15 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 
 	@IBOutlet weak var roundNumber: UILabel!
 	@IBOutlet weak var youGuesses: UILabel!
-	@IBOutlet weak var guessedNumberByGamer: UITextField!
+	@IBOutlet weak var guessedNumberByGamer: UITextField! {
+		didSet {
+			guessedNumberByGamer?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
+		}}
 	@IBOutlet weak var numberTips: UILabel!
 	@IBOutlet weak var acceptNumber: UIButton!
 	@IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint!
 
-	@IBAction func numberWasEntered(_ sender: UIButton) {
+	@IBAction func numberWasEntered(_ sender: UIButton? = nil) {
 		if let number = Int(guessedNumberByGamer.text!) {
 			output?.numberWasEntered(number: number)
 		}
@@ -53,6 +56,10 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		output?.viewDidLoadDone()
+	}
+
+	@objc func doneButtonTappedForMyNumericTextField() {
+		numberWasEntered()
 	}
 }
 

@@ -20,18 +20,21 @@ protocol SetNumberToGuessViewOutput {
 class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 
 	@IBOutlet weak var roundNumber: UILabel!
-	@IBOutlet weak var enterNumber: UITextField!
+	@IBOutlet weak var enterNumber: UITextField! {
+		didSet {
+			enterNumber?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
+		}}
 	@IBOutlet weak var acceptNumber: UIButton!
 	@IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint!
 	
-	@IBAction func numberWasAccepted(_ sender: UIButton) {
+	@IBAction func numberWasAccepted(_ sender: UIButton? = nil) {
 		let number = Int(enterNumber.text!)
 		if number == nil {
 			return
 		}
 		output?.numberWasEntered(number: number!)
 	}
-	
+
 	var output: SetNumberToGuessViewOutput?
 	var viewModel:SetNumberToGuessViewModel?
 	var keyboardHandler: KeyboardHandler?
@@ -53,7 +56,13 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationController?.navigationItem.setHidesBackButton(true, animated: false)
 		output?.viewDidLoadDone()
 	}
+
+	@objc func doneButtonTappedForMyNumericTextField() {
+		enterNumber.resignFirstResponder()
+		numberWasAccepted()
+	}
 }
+
+

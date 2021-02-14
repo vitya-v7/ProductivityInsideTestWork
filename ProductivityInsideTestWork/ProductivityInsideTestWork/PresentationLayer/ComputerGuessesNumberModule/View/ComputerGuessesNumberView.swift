@@ -57,7 +57,6 @@ class ComputerGuessesNumberView: UIViewController, ComputerGuessesNumberViewInpu
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationController?.navigationItem.setHidesBackButton(true, animated: false)
 		output?.viewDidLoadDone()
 	}
 
