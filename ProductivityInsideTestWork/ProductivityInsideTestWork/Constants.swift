@@ -17,6 +17,7 @@ enum Constants {
 	static let gameName = "Guess The Number: The Game"
 	static let congratulations = "Congratulations"
 	static let startNewGameButtonText = "Start new game"
+	static let enterNumber = "Enter a number"
 }
 
 public enum NavigationModuleType: Int {

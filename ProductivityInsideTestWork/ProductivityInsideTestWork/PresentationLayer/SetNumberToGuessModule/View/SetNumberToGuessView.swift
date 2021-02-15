@@ -45,8 +45,8 @@ class SetNumberToGuessView: UIViewController, SetNumberToGuessViewInput {
 	}
 
 	func updateInitialUI() {
-		self.acceptNumber.setTitle("Enter the number", for: .normal)
-		self.enterNumber.placeholder = "Введите число"
+		self.acceptNumber.setTitle(Constants.enterNumber, for: .normal)
+		self.enterNumber.placeholder = Constants.enterNumber + ":(\(Constants.minNumber)-\(Constants.maxNumber))"
 	}
 	
 	func setViewModel(viewModel: SetNumberToGuessViewModel) {

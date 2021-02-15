@@ -26,6 +26,9 @@ class SetNumberToGuessPresenter: SetNumberToGuessViewOutput {
 	}
 
 	func numberWasEntered(number: Int) {
+		if number < Constants.minNumber || number > Constants.maxNumber {
+			return
+		}
 		let viewModel = SetNumberToGuessViewModel(roundNumber: roundNumber!)
 		viewModel.guessedNumber = number
 		view?.setViewModel(viewModel: viewModel)

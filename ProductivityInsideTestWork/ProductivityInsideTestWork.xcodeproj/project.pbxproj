@@ -151,6 +151,7 @@
 				D9AF6B2F25D01DD000A016DF /* ProductivityInsideTestWorkTests.xctest */,
 			);
 			name = Products;
+			path = ProductivityInsideTestWorkTests;
 			sourceTree = "<group>";
 		};
 		84B338C925B022180088CCC0 /* ProductivityInsideTestWork */ = {

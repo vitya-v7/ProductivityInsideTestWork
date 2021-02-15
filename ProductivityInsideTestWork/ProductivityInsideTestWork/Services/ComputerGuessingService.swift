@@ -54,7 +54,7 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 		if validNumber <= computerNumber {
 			throw WrongButton.unfairGame(Constants.unfairGame)
 		}
-		if minGuessingNumber < computerNumber {
+		if minGuessingNumber <= computerNumber {
 			minGuessingNumber = computerNumber + 1
 		}
 		computerNumber = getComputerNumber(min:minGuessingNumber, max:maxGuessingNumber, numberTip:.greater)
@@ -67,7 +67,7 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 		if validNumber >= computerNumber {
 			throw WrongButton.unfairGame(Constants.unfairGame)
 		}
-		if maxGuessingNumber > computerNumber {
+		if maxGuessingNumber >= computerNumber {
 			maxGuessingNumber = computerNumber - 1
 		}
 		computerNumber = getComputerNumber(min:minGuessingNumber, max:maxGuessingNumber, numberTip:.less)
@@ -87,20 +87,7 @@ class ComputerGuessingService: ComputerGuessingServiceInterface {
 
 	// computer uses binary search to guess number
 	private func getComputerNumber(min:Int, max:Int, numberTip:NumberTips) -> Int {
-		var difference = maxGuessingNumber - minGuessingNumber
-		let differenceIsEven = difference % 2 == 0
-		if differenceIsEven {
-			return difference / 2 + minGuessingNumber
-		} else {
-			if numberTip == NumberTips.greater {
-				difference += 1
-				return difference / 2 + minGuessingNumber
-			} else if numberTip == NumberTips.less {
-				difference -= 1
-				return difference / 2 + minGuessingNumber
-			}
-		}
-
+		let difference = maxGuessingNumber - minGuessingNumber
 		return difference / 2 + minGuessingNumber
 	}
 }

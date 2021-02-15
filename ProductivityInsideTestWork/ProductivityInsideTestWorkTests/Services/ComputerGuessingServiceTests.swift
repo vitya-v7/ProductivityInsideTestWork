@@ -48,24 +48,24 @@ class ComputerGuessingServiceTests: XCTestCase {
 		XCTAssertEqual(computerGuessingService.maxNumber, maxNumber)
 
 		let computerNumberStep2 = try? computerGuessingService.greater()
-		XCTAssertEqual(computerNumberStep2, 31)
+		XCTAssertEqual(computerNumberStep2, 30)
 		XCTAssertEqual(computerGuessingService.minGuessingNumber, 21)
 		XCTAssertEqual(computerGuessingService.maxGuessingNumber, maxNumber)
 
 		let computerNumberStep3 = try? computerGuessingService.less()
 		XCTAssertEqual(computerNumberStep3, 25)
 		XCTAssertEqual(computerGuessingService.minGuessingNumber, 21)
-		XCTAssertEqual(computerGuessingService.maxGuessingNumber, 30)
+		XCTAssertEqual(computerGuessingService.maxGuessingNumber, 29)
 
 		let computerNumberStep4 = try? computerGuessingService.greater()
-		XCTAssertEqual(computerNumberStep4, 28)
+		XCTAssertEqual(computerNumberStep4, 27)
 		XCTAssertEqual(computerGuessingService.minGuessingNumber, 26)
-		XCTAssertEqual(computerGuessingService.maxGuessingNumber, 30)
+		XCTAssertEqual(computerGuessingService.maxGuessingNumber, 29)
 
 		let computerNumberStep5 = try? computerGuessingService.less()
 		XCTAssertEqual(computerNumberStep5, 26)
 		XCTAssertEqual(computerGuessingService.minGuessingNumber, 26)
-		XCTAssertEqual(computerGuessingService.maxGuessingNumber, 27)
+		XCTAssertEqual(computerGuessingService.maxGuessingNumber, 26)
 	}
 
 	func testCorrectGuessingOfEvenNumberWhichLessThan20() throws {
@@ -73,11 +73,12 @@ class ComputerGuessingServiceTests: XCTestCase {
 		// numberToGuess = 17
 		let computerNumberStep1 = computerGuessingService.startGame(guessedNumber: 17)
 		XCTAssertEqual(computerNumberStep1, 20)
-		XCTAssertEqual(try? computerGuessingService.less(), 9)
-		XCTAssertEqual(try? computerGuessingService.greater(), 15)
-		XCTAssertEqual(try? computerGuessingService.greater(), 18)
-		XCTAssertEqual(try? computerGuessingService.less(), 16)
-		XCTAssertEqual(try? computerGuessingService.greater(), 17)
+		let computerNumberStep2 = try? computerGuessingService.less()
+		XCTAssertEqual(computerNumberStep2, 9)
+		let computerNumberStep3 = try? computerGuessingService.greater()
+		XCTAssertEqual(computerNumberStep3, 14)
+		let computerNumberStep4 = try? computerGuessingService.greater()
+		XCTAssertEqual(computerNumberStep4, 17)
 	}
 	
 	func testCheckAttempts() throws {

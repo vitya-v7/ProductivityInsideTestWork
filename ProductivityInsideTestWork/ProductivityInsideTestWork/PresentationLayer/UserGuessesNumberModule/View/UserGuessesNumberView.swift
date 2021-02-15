@@ -44,7 +44,7 @@ class UserGuessesNumberView: UIViewController, UserGuessesNumberViewInput {
 		keyboardHandler = KeyboardHandler(mainScrollViewBottomConstraint: mainScrollViewBottomConstraint)
 		self.youGuesses.text = "You Guesses"
 		self.guessedNumberByGamer.placeholder = "Guess the number"
-		self.acceptNumber.setTitle("Enter the number", for: .normal)
+		self.acceptNumber.setTitle(Constants.enterNumber, for: .normal)
 	}
 
 	func setViewModel(viewModel: UserGuessesNumberViewModel) {
